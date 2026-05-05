@@ -212,6 +212,26 @@ text-align: center;
 .pivot-row { gap: 10px; }
 section { height: auto; padding: 60px 20px; }
 }
+
+.reveal-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.reveal-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Ajuste la hauteur du trait */
+    width: 0;
+    height: 3px; /* Épaisseur du trait */
+    background-color: var(--accent);
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); /* Temps du tracé */
+}
+
+.aos-animate .reveal-underline::after {
+    width: 100%;
+}
 </style>
 </head>
 <body>
