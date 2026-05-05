@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIORA | Architecte de Systèmes</title>
 
-    <meta name="description" content="Miora, architecte de systèmes simples pour coachs.">
+    <meta name="description" content="Miora, architecte de systèmes simples pour coachs : 4 sessions pour arrêter le yo-yo de revenus.">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -24,74 +24,90 @@
             --shadow: 8px 8px 0px #ffffff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg-1);
             color: var(--text);
-            scroll-behavior: smooth;
+            background: var(--bg-1);
+            -webkit-font-smoothing: antialiased;
         }
 
         section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 80px 40px;
         }
 
         .container {
             max-width: 1200px;
+            width: 100%;
             margin: auto;
         }
 
         h1, h2, h3 {
             font-family: 'Syne', sans-serif;
             text-transform: uppercase;
+            line-height: 0.9;
         }
 
-        h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
-        h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+        h2 { font-size: clamp(2rem, 5vw, 4rem); }
+
+        p { line-height: 1.6; }
 
         /* GRID */
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
             align-items: center;
         }
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         /* CARD */
         .card {
-            padding: 30px;
+            background: rgba(255,255,255,0.02);
             border: var(--border);
+            padding: 40px;
             box-shadow: var(--shadow);
             text-align: center;
-            transition: 0.3s;
+            transition: .3s;
         }
 
         .card:hover {
-            transform: translate(-5px, -5px);
+            transform: translate(-10px,-10px);
+            box-shadow: 15px 15px 0 var(--accent);
             border-color: var(--accent);
-            box-shadow: 10px 10px 0 var(--accent);
+        }
+
+        /* IMAGE */
+        .img {
+            width: 100%;
+            border: var(--border);
+            box-shadow: var(--shadow);
+            object-fit: cover;
         }
 
         /* CTA */
         .btn {
             display: inline-block;
-            padding: 12px 24px;
+            margin-top: 30px;
+            padding: 14px 32px;
             background: var(--accent);
             color: #000;
             text-decoration: none;
             border-radius: 999px;
-            margin-top: 20px;
+            text-transform: uppercase;
         }
 
         .btn:hover {
@@ -105,20 +121,31 @@
         .mt { margin-top: 20px; }
         .mt-lg { margin-top: 40px; }
 
-        img {
-            max-width: 100%;
+        /* OFFER */
+        .offer {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
             border: var(--border);
+            padding: 60px;
             box-shadow: var(--shadow);
+        }
+
+        .price {
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: bold;
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            opacity: 0.6;
+            padding: 30px;
+            opacity: .6;
         }
 
-        @media (max-width: 768px) {
-            section { padding: 60px 20px; }
+        @media(max-width:960px){
+            section { min-height:auto; padding:60px 20px; }
+            .grid-2, .offer { grid-template-columns:1fr; text-align:center; }
         }
     </style>
 </head>
@@ -131,52 +158,55 @@
         <div>
             <h1>On arrête le cirque.</h1>
             <p class="mt">
-                Tu es coach, tu as déjà des clientes mais ton revenu est instable.
+                Tu es coach, tu as déjà des clientes, mais ton revenu fait le yo-yo et tu es épuisée par les “stratégies” compliquées.
+                Ici, on enlève le superflu et on garde ce qui marche pour que tu repartes avec un plan simple que tu peux tenir.
             </p>
 
             <ul class="mt">
-                <li>Stop bricolage</li>
-                <li>Système clair</li>
-                <li>Authentique</li>
+                <li>Arrêter de bricoler ta com’ au feeling.</li>
+                <li>Avoir un système clair pour des appels chaque mois.</li>
+                <li>Rester toi-même sans jouer un personnage.</li>
             </ul>
 
             <a href="mailto:votre.email@domaine.com" class="btn">
-                Réserver un appel
+                Je veux arrêter le cirque
             </a>
+
+            <p class="mt">30 minutes en visio pour faire le point sur ta situation, sans pression.</p>
         </div>
 
-        <img src="Cheval.png" alt="Illustration Miora">
+        <img src="Cheval.png" alt="Miora" class="img">
     </div>
 </section>
 
 <!-- DIAGNOSTIC -->
 <section style="background: var(--bg-2);">
     <div class="container">
-        <h2 class="center">Est-ce que c’est toi ?</h2>
+        <h2 class="center">Est-ce que c'est toi ?</h2>
 
         <div class="grid-3 mt-lg">
             <div class="card">
-                <h3>Yo-Yo</h3>
-                <p>Revenus instables</p>
+                <h3>Le Yo-Yo</h3>
+                <p>Tes revenus sont imprévisibles.</p>
             </div>
 
             <div class="card">
-                <h3>Bricolage</h3>
-                <p>Pas de stratégie claire</p>
+                <h3>Le Bricolage</h3>
+                <p>Tu testes sans savoir ce qui marche.</p>
             </div>
 
             <div class="card">
-                <h3>Fatigue</h3>
-                <p>Trop d’efforts pour peu de résultats</p>
+                <h3>La Fatigue</h3>
+                <p>Tu veux un système qui respecte ton énergie.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- PROGRAMME -->
-<section>
+<section style="background: var(--bg-3);">
     <div class="container">
-        <h2 class="center">4 Sessions</h2>
+        <h2 class="center">L'Accélérateur en 4 sessions</h2>
 
         <div class="grid-3 mt-lg">
             <div class="card"><h3>01. Clarté</h3></div>
@@ -187,13 +217,36 @@
     </div>
 </section>
 
+<!-- OFFRE -->
+<section>
+    <div class="container offer">
+        <div>
+            <h2>L'Accélérateur Simple</h2>
+            <p class="mt">
+                4 sessions pour en finir avec les mois à blanc et recevoir des demandes régulières.
+            </p>
+        </div>
+
+        <div class="center">
+            <div class="price">800€</div>
+            <p>1 mois · 4 sessions</p>
+
+            <a href="mailto:votre.email@domaine.com" class="btn">
+                Réserver un appel
+            </a>
+        </div>
+    </div>
+</section>
+
 <footer>
     © 2026 Miora
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-AOS.init();
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    AOS.init({ duration: 1200 });
+}
 </script>
 
 </body>
