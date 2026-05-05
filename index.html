@@ -220,37 +220,38 @@ footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
     section { height: auto; padding: 60px 20px; }
 }
 
- /* 1. Le conteneur horizontal (la piste) */
+/* 1. Le conteneur horizontal (la piste) */
 .slider-wrapper {
-    display: flex;          /* Aligne les cartes sur une ligne */
-    gap: 25px;             /* Espace entre chaque session */
-    overflow-x: auto;      /* Permet le mouvement horizontal */
-    scroll-behavior: smooth; /* Rend le glissement fluide et classe */
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
     padding: 20px 0;
-    
-    /* Masquage de la barre de défilement pour l'esthétique */
-    scrollbar-width: none;          /* Firefox */
-    -ms-overflow-style: none;       /* IE/Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* AJOUT : Pour que les cartes s'aimantent parfaitement */
+    scroll-snap-type: x mandatory; 
 }
 
 .slider-wrapper::-webkit-scrollbar {
-    display: none;                  /* Chrome/Safari */
+    display: none;
 }
 
 /* 2. Les éléments du slider (les wagons) */
 .slider-item {
-    flex: 0 0 350px;       /* Fixe la largeur : ne rétrécit pas, ne grandit pas */
-    min-width: 350px;      /* Sécurité pour maintenir la structure */
+    flex: 0 0 350px;
+    min-width: 350px;
+    /* AJOUT : Aligne l'aimant au début de chaque carte */
+    scroll-snap-align: start; 
 }
 
 /* 3. Adaptation Mobile (UX) */
 @media (max-width: 768px) {
     .slider-item {
-        flex: 0 0 280px;   /* Cartes un peu plus étroites sur téléphone */
+        flex: 0 0 280px;
         min-width: 280px;
     }
-}
-    
+}    
     
 </style>
 </head>
@@ -398,7 +399,7 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
         </p>
 
         <!-- Changement ici : slider-wrapper au lieu de diag-grid -->
-        <div class="slider-wrapper">
+        <div id="prog-slider" class="slider-wrapper">
             
             <!-- Carte 01 -->
             <div class="slider-item">
