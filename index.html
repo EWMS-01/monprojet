@@ -220,31 +220,43 @@ footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
     section { height: auto; padding: 60px 20px; }
 }
 
-/* 1. Le conteneur horizontal (la piste) */
+/* 1. Le conteneur avec marges pour centrer */
 .slider-wrapper {
     display: flex;
-    gap: 25px;
+    gap: 40px; /* Plus d'espace entre les sessions */
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding: 20px 0;
+    /* On ajoute 15% de marge sur les côtés pour forcer le centrage */
+    padding: 40px 15%; 
     scrollbar-width: none;
     -ms-overflow-style: none;
-    /* AJOUT : Pour que les cartes s'aimantent parfaitement */
-    scroll-snap-type: x mandatory; 
+    scroll-snap-type: x mandatory;
 }
 
 .slider-wrapper::-webkit-scrollbar {
     display: none;
 }
 
-/* 2. Les éléments du slider (les wagons) */
+/* 2. Les cartes (format Focus) */
 .slider-item {
-    flex: 0 0 350px;
-    min-width: 350px;
-    /* AJOUT : Aligne l'aimant au début de chaque carte */
-    scroll-snap-align: start; 
+    /* La carte prend 70% de la largeur disponible */
+    flex: 0 0 70%; 
+    min-width: 280px;
+    max-width: 500px; /* On évite qu'elle soit trop large sur ordi */
+    /* L'aimant se place au MILIEU de la carte */
+    scroll-snap-align: center; 
+    transition: transform 0.3s ease;
 }
 
+/* 3. Ajustement mobile pour que la carte soit plus grande */
+@media (max-width: 768px) {
+    .slider-wrapper {
+        padding: 20px 10%;
+    }
+    .slider-item {
+        flex: 0 0 80%;
+    }
+}
 /* 3. Adaptation Mobile (UX) */
 @media (max-width: 768px) {
     .slider-item {
@@ -562,18 +574,29 @@ Je veux mon plan simple
     
     if (slider) { 
         function scrollNext() {
-            const item = slider.querySelector('.slider-item');
-            if (!item) return;
-            
-            const cardWidth = item.offsetWidth + 25; 
-            
-            // On vérifie si on est au bout du défilement
-            if (Math.ceil(slider.scrollLeft + slider.offsetWidth) >= slider.scrollWidth - 5) {
-                slider.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                slider.scrollBy({ left: cardWidth, behavior: 'smooth' });
-            }
+    const items = slider.querySelectorAll('.slider-item');
+    const containerWidth = slider.offsetWidth;
+    const scrollLeft = slider.scrollLeft;
+    
+    // On cherche quelle est la carte actuellement visible au centre
+    let currentIndex = 0;
+    items.forEach((item, index) => {
+        if (item.offsetLeft <= scrollLeft + (containerWidth / 2)) {
+            currentIndex = index;
         }
+    });
+
+    // On définit la cible : la suivante ou la première
+    let nextIndex = currentIndex + 1;
+    if (nextIndex >= items.length) {
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+        const nextItem = items[nextIndex];
+        // Calcul pour centrer parfaitement la carte suivante
+        const targetScroll = nextItem.offsetLeft - (containerWidth / 2) + (nextItem.offsetWidth / 2);
+        slider.scrollTo({ left: targetScroll, behavior: 'smooth' });
+    }
+}
 
         // Lance le cycle toutes les 3 secondes
         let autoCycle = setInterval(scrollNext, 3000);
