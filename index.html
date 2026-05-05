@@ -91,15 +91,17 @@ p, li, footer {
 /* ÉLÉMENTS DESIGN IMAGE (SLIDE 1) */
 .hero-img-thin-cyan {
     border: 3px solid var(--accent) !important;
-    box-shadow: 4px 4px 0px rgba(0, 242, 255, 0.2) !important;
-    filter: white(1);
+    /* Modification ici : 255, 255, 255 correspond au blanc */
+    box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8) !important; 
+    filter: grayscale(1);
     width: 100% !important;
+    max-width: 450px;
     margin-right: 0 !important;
     margin-left: auto;
     display: block;
     transition: 0.3s ease;
 }
-
+    
 /* CARTES (SLIDE 2) */
 .card {
     background: rgba(255, 255, 255, 0.02);
