@@ -566,50 +566,53 @@ Je veux mon plan simple
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // Initialisation des animations au défilement
+    // 1. On initialise les animations AOS
     AOS.init({ duration: 1200, once: false });
 
-    // --- TON NOUVEAU CODE POUR LE SLIDER AUTO ---
     const slider = document.getElementById('prog-slider');
     
-    if (slider) { 
+    if (slider) {
         function scrollNext() {
-    const items = slider.querySelectorAll('.slider-item');
-    const containerWidth = slider.offsetWidth;
-    const scrollLeft = slider.scrollLeft;
-    
-    // On cherche quelle est la carte actuellement visible au centre
-    let currentIndex = 0;
-    items.forEach((item, index) => {
-        if (item.offsetLeft <= scrollLeft + (containerWidth / 2)) {
-            currentIndex = index;
+            const items = slider.querySelectorAll('.slider-item');
+            const containerWidth = slider.offsetWidth;
+            
+            // On calcule l'index de la carte actuellement au centre
+            // On ajoute une marge d'erreur de 10px pour le calcul
+            let currentIndex = 0;
+            items.forEach((item, index) => {
+                if (item.offsetLeft <= slider.scrollLeft + (containerWidth / 2) + 10) {
+                    currentIndex = index;
+                }
+            });
+
+            // On définit la cible : la carte suivante
+            let nextIndex = currentIndex + 1;
+
+            // Si on dépasse la dernière carte (index 3), on revient à 0
+            if (nextIndex >= items.length) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                // Calcul précis pour centrer la carte suivante
+                const nextItem = items[nextIndex];
+                const targetScroll = nextItem.offsetLeft - (containerWidth / 2) + (nextItem.offsetWidth / 2);
+                slider.scrollTo({ left: targetScroll, behavior: 'smooth' });
+            }
         }
-    });
 
-    // On définit la cible : la suivante ou la première
-    let nextIndex = currentIndex + 1;
-    if (nextIndex >= items.length) {
-        slider.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-        const nextItem = items[nextIndex];
-        // Calcul pour centrer parfaitement la carte suivante
-        const targetScroll = nextItem.offsetLeft - (containerWidth / 2) + (nextItem.offsetWidth / 2);
-        slider.scrollTo({ left: targetScroll, behavior: 'smooth' });
-    }
-}
-
-        // Lance le cycle toutes les 3 secondes
+        // Cycle de 3 secondes
         let autoCycle = setInterval(scrollNext, 3000);
 
-        // Pause au survol
-        slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
-        slider.addEventListener('mouseleave', () => {
+        // Gestion des pauses (Souris et Tactile)
+        const stopCycle = () => clearInterval(autoCycle);
+        const startCycle = () => {
             clearInterval(autoCycle);
             autoCycle = setInterval(scrollNext, 3000);
-        });
+        };
 
-        // Sécurité pour le tactile
-        slider.addEventListener('touchstart', () => clearInterval(autoCycle), {passive: true});
+        slider.addEventListener('mouseenter', stopCycle);
+        slider.addEventListener('mouseleave', startCycle);
+        slider.addEventListener('touchstart', stopCycle, {passive: true});
+        slider.addEventListener('touchend', startCycle);
     }
 </script>
     
