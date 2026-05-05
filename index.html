@@ -220,6 +220,27 @@ footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
     section { height: auto; padding: 60px 20px; }
 }
 
+    /* Conteneur pour le défilement horizontal */
+.slider-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 25px;
+    padding: 20px 0 40px 0;
+    scroll-snap-type: x mandatory; /* Aimante les cartes au centre */
+    scrollbar-width: none; /* Cache la barre sur Firefox */
+    -ms-overflow-style: none; /* Cache sur Edge */
+}
+
+.slider-wrapper::-webkit-scrollbar {
+    display: none; /* Cache la barre sur Chrome/Safari */
+}
+
+/* On réutilise tes cartes mais on fixe leur largeur pour le scroll */
+.slider-item {
+    flex: 0 0 320px; /* Largeur fixe de chaque carte */
+    scroll-snap-align: center;
+}
+    
 </style>
 </head>
 <body>
@@ -357,68 +378,58 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
 </section>
     
 <!-- SLIDE 3 : PROGRAMME (4 SESSIONS) -->
-<section style="background-color: var(--bg-3);">
-<div class="container">
-<h2 class="section-title">
-L'Accélérateur en 4 sessions
-</h2>
+<section style="background-color: var(--bg-3); padding: 100px 0;">
+    <div class="container">
+        <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
 
-<p
-data-aos="fade-up"
-style="
-text-align: center;
-font-size: 1.25rem;
-font-weight: 500;
-max-width: 700px;
-margin: 0 auto 40px auto;
-">
-4 sessions pour en finir avec les mois à blanc, sortir du bricolage et poser un système simple que tu peux tenir seule.
-</p>
+        <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
+            4 sessions pour en finir avec les mois à blanc, sortir du bricolage et poser un système simple que tu peux tenir seule.
+        </p>
 
-<div class="diag-grid" style="grid-template-columns: repeat(2, minmax(280px, 1fr));">
-<div class="card" data-aos="fade-up" data-aos-delay="100">
-<h3 style="color: var(--accent); letter-spacing: 0.08em;">01. Clarté</h3>
-<p>
-On définit qui tu accompagnes, ce que tu promets vraiment et pourquoi on te choisit toi plutôt qu’une autre.
-</p>
-</div>
+        <!-- Changement ici : slider-wrapper au lieu de diag-grid -->
+        <div class="slider-wrapper">
+            
+            <!-- Carte 01 -->
+            <div class="slider-item">
+                <div class="card" data-aos="fade-up" data-aos-delay="100" style="height: 100%;">
+                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">01. Clarté</h3>
+                    <p style="margin-top: 15px; font-weight: 300;">On définit qui tu accompagnes, ce que tu promets vraiment et pourquoi on te choisit toi plutôt qu’une autre.</p>
+                </div>
+            </div>
 
-<div class="card" data-aos="fade-up" data-aos-delay="200">
-<h3 style="color: var(--accent); letter-spacing: 0.08em;">02. Message</h3>
-<p>
-On simplifie ta façon de parler de ton coaching : tes angles de contenu et ton invitation à l’appel.
-</p>
-</div>
+            <!-- Carte 02 -->
+            <div class="slider-item">
+                <div class="card" data-aos="fade-up" data-aos-delay="200" style="height: 100%;">
+                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">02. Message</h3>
+                    <p style="margin-top: 15px; font-weight: 300;">On simplifie ta façon de parler de ton coaching : tes angles de contenu et ton invitation à l’appel.</p>
+                </div>
+            </div>
 
-<div class="card" data-aos="fade-up" data-aos-delay="300">
-<h3 style="color: var(--accent); letter-spacing: 0.08em;">03. Système</h3>
-<p>
-On crée ton mini système d’acquisition sans usine à gaz, adapté à ton énergie et à ton canal principal.
-</p>
-</div>
+            <!-- Carte 03 -->
+            <div class="slider-item">
+                <div class="card" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
+                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">03. Système</h3>
+                    <p style="margin-top: 15px; font-weight: 300;">On crée ton mini système d’acquisition sans usine à gaz, adapté à ton énergie et à ton canal principal.</p>
+                </div>
+            </div>
 
-<div class="card" data-aos="fade-up" data-aos-delay="400">
-<h3 style="color: var(--accent); letter-spacing: 0.08em;">04. Action</h3>
-<p>
-Ton plan concret sur 30 jours pour passer à l’action, savoir quoi faire chaque semaine et quoi arrêter.
-</p>
-</div>
-</div>
+            <!-- Carte 04 -->
+            <div class="slider-item">
+                <div class="card" data-aos="fade-up" data-aos-delay="400" style="height: 100%;">
+                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">04. Action</h3>
+                    <p style="margin-top: 15px; font-weight: 300;">Ton plan concret sur 30 jours pour passer à l’action, savoir quoi faire chaque semaine et quoi arrêter.</p>
+                </div>
+            </div>
 
-<p style="
-font-size: 1rem;
-margin-top: 35px;
-opacity: 0.9;
-text-align:center;
-font-weight: 500;
-border-top: 1px solid rgba(255,255,255,0.2);
-padding-top: 20px;
-">
-Ce n’est pas pour toi si tu cherches une solution miracle ou si tu n’es pas prête à faire ta part du travail pendant 30 jours.
-</p>
-</div>
+        </div>
+
+        <!-- Phrase de mise en garde -->
+        <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
+            Ce n’est pas pour toi si tu cherches une solution miracle ou si tu n’es pas prête à faire ta part du travail pendant 30 jours.
+        </p>
+    </div>
 </section>
-
+    
 <!-- SLIDE 4 : L'OFFRE -->
 <section style="background-color: var(--bg-1);">
 <div class="container">
