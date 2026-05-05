@@ -10,13 +10,13 @@
 
 <style>
 :root {
---bg-1: #05051a;
---bg-2: #080826;
---bg-3: #030312;
---text: #ffffff;
---accent: #00f2ff;
---border-white: 3px solid #ffffff;
---shadow-white: 8px 8px 0px #ffffff;
+    --bg-1: #05051a;
+    --bg-2: #080826;
+    --bg-3: #030312;
+    --text: #ffffff;
+    --accent: #00f2ff;
+    --border-white: 3px solid #ffffff;
+    --shadow-white: 8px 8px 0px #ffffff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,195 +24,98 @@
 html { scroll-behavior: smooth; }
 
 body {
-color: var(--text);
-font-family: 'Space Grotesk', sans-serif;
-font-weight: 300;
-scroll-snap-type: y mandatory;
-overflow-y: scroll;
-background-color: var(--bg-1);
--webkit-font-smoothing: antialiased;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    background-color: var(--bg-1);
+    -webkit-font-smoothing: antialiased;
 }
 
 @media (max-width: 768px) {
-body { scroll-snap-type: none; }
+    body { scroll-snap-type: none; }
 }
-
-/* NAVIGATION */
-nav {
-position: fixed;
-top: 0;
-width: 100%;
-z-index: 1000;
-padding: 20px 40px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-background: rgba(5, 5, 26, 0.8);
-backdrop-filter: blur(10px);
-}
-
-.nav-logo { font-family: 'Syne'; font-weight: 800; color: var(--accent); text-decoration: none; font-size: 1.2rem; }
 
 section {
-min-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 80px 40px;
-scroll-snap-align: start;
-position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    scroll-snap-align: start;
+    position: relative;
 }
 
 .container {
-max-width: 1200px;
-width: 100%;
-margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 /* TYPOGRAPHIE */
 h1, h2, h3, .label-style {
-font-family: 'Syne', sans-serif;
-text-transform: uppercase;
-line-height: 0.9;
-letter-spacing: -0.02em;
+    font-family: 'Syne', sans-serif;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
 }
 
 h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
 .section-title {
-font-size: clamp(2rem, 5vw, 4rem);
-text-align: center;
-margin-bottom: 40px;
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 p, li, footer {
-font-family: 'Space Grotesk', sans-serif;
-font-weight: 300;
-line-height: 1.6;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
 }
 
 /* LAYOUTS */
 .hero-layout {
-display: grid;
-grid-template-columns: 1.2fr 0.8fr;
-gap: 60px;
-align-items: center;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
 }
 
 .diag-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
-/* ÉLÉMENTS DESIGN */
+/* ÉLÉMENTS DESIGN IMAGE (SLIDE 1) */
 .hero-img-thin-cyan {
-border: 1px solid var(--accent);
-box-shadow: 4px 4px 0px rgba(0, 242, 255, 0.2);
-filter: grayscale(1);
-width: 115%;
-margin-right: -15%;
-transition: 0.3s ease;
+    border: 1px solid var(--accent) !important;
+    box-shadow: 4px 4px 0px rgba(0, 242, 255, 0.2) !important;
+    filter: grayscale(1);
+    width: 115% !important;
+    margin-right: -15% !important;
+    display: block;
+    transition: 0.3s ease;
 }
 
-.hero-img-border { border: 15px solid #000 !important; }
-
+/* CARTES (SLIDE 2) */
 .card {
-background: rgba(255, 255, 255, 0.02);
-border: var(--border-white);
-padding: 40px;
-box-shadow: var(--shadow-white);
-transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-text-align: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: var(--border-white);
+    padding: 40px;
+    box-shadow: var(--shadow-white);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
 }
 
 .card:hover {
-transform: translate(-10px, -10px);
-box-shadow: 15px 15px 0px var(--accent);
-border-color: var(--accent);
+    transform: translate(-10px, -10px);
+    box-shadow: 15px 15px 0px var(--accent);
+    border-color: var(--accent);
 }
 
-.label-style {
-font-size: 0.9rem;
-font-weight: 800;
-letter-spacing: 4px;
-}
-
-/* PIVOT NEUROMARKETING */
-.pivot-row {
-display: grid;
-grid-template-columns: 200px 1fr;
-gap: 40px;
-max-width: 1000px;
-margin: 0 auto;
-align-items: baseline;
-}
-
-/* OFFRE */
-.offer-box {
-background: rgba(255, 255, 255, 0.02);
-padding: 60px;
-border: var(--border-white);
-display: flex;
-justify-content: space-between;
-align-items: center;
-box-shadow: var(--shadow-white);
-gap: 40px;
-}
-
-.btn-cta {
-background: var(--accent);
-color: #05051a;
-padding: 14px 32px;
-text-decoration: none;
-font-family: 'Space Grotesk', sans-serif;
-font-size: 0.95rem;
-text-transform: uppercase;
-letter-spacing: 0.08em;
-font-weight: 600;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-border-radius: 999px;
-border: 1px solid transparent;
-transition: 0.25s ease;
-cursor: pointer;
-}
-
-.btn-cta:hover {
-background: transparent;
-color: var(--accent);
-border-color: var(--accent);
-transform: translateY(-1px);
-}
-
-ul { list-style: none; margin-top: 25px; padding-left: 0; }
-ul li { margin-bottom: 12px; font-size: 1.05rem; }
-ul li::before {
-content: "→ ";
-color: var(--accent);
-margin-right: 6px;
-}
-
-footer {
-text-align: center;
-padding: 30px;
-font-size: 0.9rem;
-opacity: 0.6;
-background: #02020b;
-}
-
-@media (max-width: 960px) {
-.hero-layout,
-.pivot-row,
-.offer-box {
-grid-template-columns: 1fr;
-text-align: center;
-}
-.pivot-row { gap: 10px; }
-section { height: auto; padding: 60px 20px; }
-}
-
+/* ANIMATION SOULIGNEMENT (SLIDE 2) */
 .reveal-underline {
     position: relative;
     display: inline-block;
@@ -222,15 +125,60 @@ section { height: auto; padding: 60px 20px; }
     content: "";
     position: absolute;
     left: 0;
-    bottom: -5px; /* Ajuste la hauteur du trait */
-    width: 0;
-    height: 3px; /* Épaisseur du trait */
+    bottom: -5px;
+    width: 0%;
+    height: 4px;
     background-color: var(--accent);
-    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); /* Temps du tracé */
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-.aos-animate .reveal-underline::after {
-    width: 100%;
+[data-aos].aos-animate .reveal-underline::after {
+    width: 100% !important;
+}
+
+/* AUTRES ÉLÉMENTS */
+.label-style { font-size: 0.9rem; font-weight: 800; letter-spacing: 4px; }
+
+.pivot-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: baseline;
+}
+
+.offer-box {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 60px;
+    border: var(--border-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-white);
+    gap: 40px;
+}
+
+.btn-cta {
+    background: var(--accent);
+    color: #05051a;
+    padding: 14px 32px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 999px;
+    transition: 0.25s ease;
+}
+
+ul { list-style: none; margin-top: 25px; padding-left: 0; }
+ul li::before { content: "→ "; color: var(--accent); margin-right: 6px; }
+
+footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
+
+@media (max-width: 960px) {
+    .hero-layout, .pivot-row, .offer-box { grid-template-columns: 1fr; text-align: center; }
+    .hero-img-thin-cyan { width: 100% !important; margin-right: 0 !important; }
+    section { height: auto; padding: 60px 20px; }
 }
 </style>
 </head>
@@ -309,19 +257,7 @@ Tu veux un système robuste qui respecte ton énergie, pas un second job à plei
 <p
 data-aos="fade-up"
 data-aos-delay="600"
-style="
-margin-top: 100px; 
-text-align: center;
-font-size: clamp(1.5rem, 4vw, 2.5rem); 
-font-family: 'Syne', sans-serif;
-font-weight: 800;
-text-transform: uppercase;
-max-width: 900px;
-margin-left: auto;
-margin-right: auto;
-line-height: 1.2;
-color: var(--text);
-">
+style="margin-top: 100px; text-align: center; font-size: clamp(1.8rem, 5vw, 2.8rem); font-family: 'Syne', sans-serif; font-weight: 800; text-transform: uppercase; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.1; color: #ffffff;">
 Tu n'as pas besoin d'une énième stratégie miracle,<br>
 <span class="reveal-underline">tu as besoin d'un système qui respecte ton énergie.</span>
 </p>
