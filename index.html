@@ -223,47 +223,30 @@ footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
 /* 1. Le conteneur avec marges pour centrer */
 .slider-wrapper {
     display: flex;
-    gap: 40px; /* Plus d'espace entre les sessions */
-    overflow-x: auto;
+    gap: 30px;
+    overflow-x: hidden; /* On cache la barre pour que ce soit propre */
     scroll-behavior: smooth;
-    /* On ajoute 15% de marge sur les côtés pour forcer le centrage */
-    padding: 40px 15%; 
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    scroll-snap-type: x mandatory;
+    padding: 40px 0;
+    width: 100%;
 }
 
-.slider-wrapper::-webkit-scrollbar {
-    display: none;
-}
-
-/* 2. Les cartes (format Focus) */
 .slider-item {
-    /* La carte prend 70% de la largeur disponible */
-    flex: 0 0 70%; 
-    min-width: 280px;
-    max-width: 500px; /* On évite qu'elle soit trop large sur ordi */
-    /* L'aimant se place au MILIEU de la carte */
-    scroll-snap-align: center; 
-    transition: transform 0.3s ease;
+    flex: 0 0 100%; /* Par défaut, une carte prend toute la place */
+    display: flex;
+    justify-content: center; /* Centre la carte interne */
 }
 
-/* 3. Ajustement mobile pour que la carte soit plus grande */
-@media (max-width: 768px) {
-    .slider-wrapper {
-        padding: 20px 10%;
-    }
-    .slider-item {
-        flex: 0 0 80%;
-    }
+.slider-item .card {
+    width: 100%;
+    max-width: 500px; /* La carte elle-même ne dépasse pas 500px */
+    margin: 0 auto;
 }
-/* 3. Adaptation Mobile (UX) */
-@media (max-width: 768px) {
+
+@media (min-width: 960px) {
     .slider-item {
-        flex: 0 0 280px;
-        min-width: 280px;
+        flex: 0 0 100%; /* Garde une carte à la fois pour l'effet Focus */
     }
-}    
+}   
     
 </style>
 </head>
@@ -566,53 +549,40 @@ Je veux mon plan simple
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // 1. On initialise les animations AOS
     AOS.init({ duration: 1200, once: false });
 
     const slider = document.getElementById('prog-slider');
-    
+    let currentIndex = 0;
+
     if (slider) {
+        const items = slider.querySelectorAll('.slider-item');
+        const totalItems = items.length;
+
         function scrollNext() {
-            const items = slider.querySelectorAll('.slider-item');
-            const containerWidth = slider.offsetWidth;
+            currentIndex++;
             
-            // On calcule l'index de la carte actuellement au centre
-            // On ajoute une marge d'erreur de 10px pour le calcul
-            let currentIndex = 0;
-            items.forEach((item, index) => {
-                if (item.offsetLeft <= slider.scrollLeft + (containerWidth / 2) + 10) {
-                    currentIndex = index;
-                }
-            });
-
-            // On définit la cible : la carte suivante
-            let nextIndex = currentIndex + 1;
-
-            // Si on dépasse la dernière carte (index 3), on revient à 0
-            if (nextIndex >= items.length) {
-                slider.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                // Calcul précis pour centrer la carte suivante
-                const nextItem = items[nextIndex];
-                const targetScroll = nextItem.offsetLeft - (containerWidth / 2) + (nextItem.offsetWidth / 2);
-                slider.scrollTo({ left: targetScroll, behavior: 'smooth' });
+            // Si on dépasse la dernière carte, on revient à la première
+            if (currentIndex >= totalItems) {
+                currentIndex = 0;
             }
+
+            const targetScroll = slider.offsetWidth * currentIndex;
+            
+            slider.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
         }
 
-        // Cycle de 3 secondes
+        // Relancer l'automate
         let autoCycle = setInterval(scrollNext, 3000);
 
-        // Gestion des pauses (Souris et Tactile)
-        const stopCycle = () => clearInterval(autoCycle);
-        const startCycle = () => {
+        // Pause au survol
+        slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
+        slider.addEventListener('mouseleave', () => {
             clearInterval(autoCycle);
             autoCycle = setInterval(scrollNext, 3000);
-        };
-
-        slider.addEventListener('mouseenter', stopCycle);
-        slider.addEventListener('mouseleave', startCycle);
-        slider.addEventListener('touchstart', stopCycle, {passive: true});
-        slider.addEventListener('touchend', startCycle);
+        });
     }
 </script>
     
