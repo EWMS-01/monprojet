@@ -77,17 +77,25 @@ p, li, footer {
 /* LAYOUTS */
 .hero-layout {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.1fr 0.9fr; 
     gap: 60px;
     align-items: center;
 }
 
-.diag-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+.hero-layout > div:first-child {
+    max-width: 600px; 
 }
 
+.hero-img-thin-cyan {
+    border: 3px solid var(--accent) !important;
+    box-shadow: 8px 8px 0px #ffffff !important; 
+    filter: grayscale(1);
+    width: 100% !important;
+    max-width: 400px; /* On réduit un peu ici (de 450 à 400) */
+    margin-left: auto;
+    display: block;
+}
+    
 /* ÉLÉMENTS DESIGN IMAGE (SLIDE 1) */
 .hero-img-thin-cyan {
     border: 3px solid var(--accent) !important;
