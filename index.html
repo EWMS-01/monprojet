@@ -183,24 +183,28 @@ p, li, footer {
     gap: 40px;
 }
 
+/* 1. État de repos : Épuré et Professionnel */
 .btn-cta {
-    background: transparent; /* On vide le fond */
-    color: var(--accent); /* Le texte prend la couleur cyan */
+    display: inline-block;
+    background: transparent;
+    color: var(--accent) !important;
     padding: 14px 32px;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 700;
-    border: 2px solid var(--accent); /* On ajoute la bordure cyan */
-    border-radius: 999px;
-    transition: all 0.3s ease;
-    display: inline-block;
+    border: 2px solid var(--accent);
+    border-radius: 999px; /* Bords arrondis comme souhaité */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif !important;
 }
 
+/* 2. État de survol : L'impact Rebelle */
 .btn-cta:hover {
-    background: var(--accent); /* Le fond se remplit au survol */
-    color: #05051a; /* Le texte repasse en sombre pour être lisible */
-    box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4); /* Effet lumineux */
-    transform: translateY(-2px); /* Petit saut dynamique */
+    background: var(--accent) !important;
+    color: #05051a !important; /* Retour au noir pour la lisibilité */
+    box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4);
+    transform: translateY(-2px);
 }
     
 .diag-grid {
@@ -294,9 +298,10 @@ footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
             </ul>
 
             <div style="margin-top: 40px;">
-                <a href="mailto:votre.email@domaine.com" class="btn-cta">
-                    Je veux arrêter le cirque
+                <a href="https://cal.com/miora-rasolofo" class="btn-cta">
+                    Stabiliser mes revenus
                 </a>
+                
                 <p style="font-size: 0.9rem; margin-top: 30px; opacity: 0.7;">
                     30 minutes en visio pour faire le point sur ta situation, sans pression.
                 </p>
