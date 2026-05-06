@@ -9,50 +9,43 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
-/* 1. Importation et Polices */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
+/* RESET & BASE */
 * {
     font-family: 'Inter', sans-serif !important;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; padding: 0; box-sizing: border-box;
 }
 
 :root {
-    --bg-1: #05051a;
-    --bg-2: #080826;
-    --bg-3: #030312;
-    --text: #ffffff;
-    --accent: #00f2ff;
+    --bg-1: #05051a; --bg-2: #080826; --bg-3: #030312;
+    --text: #ffffff; --accent: #00f2ff;
     --border-white: 3px solid #ffffff;
     --shadow-white: 8px 8px 0px #ffffff;
 }
 
 html { 
     scroll-behavior: smooth; 
-    scroll-snap-type: y mandatory; /* Mode Slide par défaut */
+    scroll-snap-type: y mandatory; 
 }
 
 body {
     color: var(--text);
     background-color: var(--bg-1);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
 }
 
-/* 2. Sections et Layouts (PC) */
+/* SECTIONS (PC) */
 section {
-    min-height: 100vh;
-    height: 100vh; /* Slide fixe sur PC */
+    height: 100vh; /* Fixe pour l'effet slide */
     display: flex;
-    align-items: center;
+    align-items: center; 
     justify-content: center;
-    padding: 80px 40px;
     scroll-snap-align: start;
     scroll-snap-stop: always;
     position: relative;
     overflow: hidden;
+    padding: 40px;
 }
 
 .container {
@@ -61,38 +54,37 @@ section {
     margin: 0 auto;
 }
 
+/* TYPOGRAPHIE & ANIMATION (SLIDE 4 / REVEAL) */
+h1, h2, h3 { font-family: 'Syne', sans-serif !important; text-transform: uppercase; line-height: 0.9; }
+h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+
+.reveal-underline { position: relative; display: inline-block; }
+.reveal-underline::after {
+    content: ""; position: absolute; left: 0; bottom: -5px;
+    width: 0%; height: 4px; background-color: var(--accent);
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+[data-aos].aos-animate .reveal-underline::after { width: 100% !important; }
+
+.strike-accent {
+    text-decoration: line-through;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 5px;
+}
+
+/* LAYOUTS */
 .hero-layout {
     display: flex;
+    align-items: center; /* Important pour le Slide 1 et 5 */
     justify-content: space-between;
-    align-items: center;
     gap: 60px;
-}
-
-.hero-layout > div:first-child { flex: 1.2; }
-.hero-layout > div:last-child { flex: 0.8; display: flex; justify-content: center; }
-
-/* 3. Typographie */
-h1, h2, h3, .section-title {
-    font-family: 'Syne', sans-serif !important;
-    text-transform: uppercase;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-}
-
-h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
-.section-title { font-size: clamp(2rem, 5vw, 4rem); text-align: center; margin-bottom: 40px; }
-
-p, li { font-weight: 300; line-height: 1.6; font-size: 1.1rem; }
-
-/* 4. Composants (Cartes, Boutons, Images) */
-.hero-img-thin-cyan {
-    border: 3px solid var(--accent);
-    box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8);
-    filter: grayscale(1);
     width: 100%;
-    max-width: 420px;
-    height: auto;
-    transition: 0.3s ease;
+}
+
+.diag-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
 }
 
 .card {
@@ -103,16 +95,9 @@ p, li { font-weight: 300; line-height: 1.6; font-size: 1.1rem; }
     transition: 0.4s ease;
 }
 
-.diag-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 50px;
-}
-
+/* BOUTON */
 .btn-cta {
     display: inline-block;
-    background: transparent;
     color: var(--accent) !important;
     padding: 16px 36px;
     text-decoration: none;
@@ -121,93 +106,45 @@ p, li { font-weight: 300; line-height: 1.6; font-size: 1.1rem; }
     border: 2px solid var(--accent);
     border-radius: 999px;
     transition: 0.3s;
-    cursor: pointer;
 }
+.btn-cta:hover { background: var(--accent) !important; color: #05051a !important; }
 
-.btn-cta:hover {
-    background: var(--accent) !important;
-    color: #05051a !important;
-    box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4);
-}
-
-/* Navigation latérale */
-.nav-dots {
-    position: fixed;
-    right: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 1000;
-}
-
-.dot { width: 12px; height: 12px; border: 2px solid var(--accent); border-radius: 50%; cursor: pointer; transition: 0.3s; }
+/* DOTS */
+.nav-dots { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
+.dot { width: 12px; height: 12px; border: 2px solid var(--accent); border-radius: 50%; cursor: pointer; }
 .dot.active { background: var(--accent); transform: scale(1.3); }
 
-/* -----------------------------------------------------------
-   5. LE CORRECTIF MOBILE ULTIME (Écrase tout ce qui précède)
------------------------------------------------------------ */
+/* --- CORRECTIF MOBILE (CIBLÉ) --- */
 @media (max-width: 768px) {
-    html {
-        scroll-snap-type: none !important; /* Désactive le slide par slide */
-    }
-
-    body {
-        overflow-y: auto;
-    }
-
+    html { scroll-snap-type: none !important; }
+    
     section {
-        height: auto !important; /* Laisse le contenu définir la hauteur */
+        height: auto !important; /* Libère la hauteur */
         min-height: 100vh;
-        padding: 80px 24px !important;
-        display: block !important; /* On empile tout verticalement */
-        scroll-snap-align: none !important;
-        overflow: visible !important;
-    }
-
-    .container {
-        display: block !important;
+        padding: 80px 20px !important;
+        display: flex !important; /* Garde le flex pour le centrage */
+        flex-direction: column !important;
+        justify-content: center !important;
     }
 
     .hero-layout {
         flex-direction: column !important;
         text-align: center;
-        gap: 40px !important;
-    }
-
-    .hero-layout > div:first-child, 
-    .hero-layout > div:last-child {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex: none !important;
-    }
-
-    .diag-grid {
-        grid-template-columns: 1fr !important; /* Cartes l'une sous l'autre */
         gap: 40px;
     }
 
-    h1, .massive-title {
-        font-size: 2.8rem !important; /* Réduction de la taille du titre */
-        line-height: 1.1 !important;
-        margin-bottom: 20px;
-    }
+    .diag-grid { grid-template-columns: 1fr !important; }
 
-    .hero-img-thin-cyan {
-        max-width: 280px !important;
-        margin: 0 auto !important;
-    }
+    h1 { font-size: 2.8rem !important; }
+    
+    /* On s'assure que le logo/image du slide 1 et 5 ne mangent pas tout */
+    .hero-layout > div { width: 100% !important; }
+    img { max-width: 280px !important; margin: 0 auto; }
 
-    .nav-dots {
-        display: none !important; /* Cache les points de navigation */
-    }
-
-    .card {
-        padding: 30px 20px !important;
-    }
+    .nav-dots { display: none !important; }
 }
 </style>
+
 </head>
 <body>
 
