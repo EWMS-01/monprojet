@@ -9,6 +9,14 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
+    /* 1. Importation de la police moderne */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+/* 2. Application à TOUT le site pour éviter les mélanges */
+* {
+    font-family: 'Inter', sans-serif !important;
+}
+    
 :root {
     --bg-1: #05051a;
     --bg-2: #080826;
@@ -488,22 +496,22 @@ Réserver un appel
 </div>
 </section>
 
-<!-- SLIDE 5 : À PROPOS (VERSION FINALE CYAN & OFFSET) -->
+<!-- SLIDE 5 : À PROPOS -->
 <section style="background-color: var(--bg-2); padding: 120px 0; border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container hero-layout" style="display: flex; align-items: center; gap: 80px;">
         
         <!-- TEXTE À GAUCHE -->
         <div data-aos="fade-right" style="flex: 1.5;">
-            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1.1;">Miora.</h2>
+            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0;">Miora.</h2>
             
-            <div style="width: 50px; height: 4px; background: #00ffff; margin: 30px 0;"></div> <!-- Ligne cyan -->
+            <div style="width: 50px; height: 4px; background: #00ffff; margin: 30px 0;"></div>
             
             <p style="font-size: 1.3rem; line-height: 1.6; font-weight: 300; margin-bottom: 25px;">
                 J'accompagne les coachs à stabiliser leurs revenus via des systèmes 
-                <span style="color: #00ffff; font-weight: 600;">simples, agnostiques et durables.</span>
+                <span style="color: #00ffff; font-weight: 700;">simples, agnostiques et durables.</span>
             </p>
             
-            <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.8;">
+            <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.8; font-weight: 400;">
                 Après avoir construit des architectures complexes pour de gros business, j’ai choisi de revenir à l’essentiel : 
                 <strong>l’efficacité sans le cirque marketing.</strong>
             </p>
@@ -513,7 +521,7 @@ Réserver un appel
             </p>
         </div>
 
-        <!-- LOGO À DROITE (OFFSET BLANC & NETTOYAGE BORDURES) -->
+        <!-- LOGO À DROITE -->
         <div data-aos="zoom-in" style="flex: 1; display: flex; justify-content: center;">
             <div style="position: relative; padding: 0; border: 1px solid #ffffff; background: #000; box-shadow: 12px 12px 0px #ffffff; overflow: hidden; line-height: 0;">
                 <img src="Logo.png" alt="Miora Logo" style="display: block; width: 100%; max-width: 320px; height: auto; transform: scale(1.02); object-fit: cover;">
@@ -521,7 +529,7 @@ Réserver un appel
         </div>
 
     </div>
-</section>
+</section> 
     
     <!-- SLIDE 6 : COMMENT ÇA SE PASSE ? -->
 <section style="background-color: var(--bg-3);">
