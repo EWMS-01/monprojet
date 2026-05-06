@@ -76,7 +76,7 @@
             letter-spacing: -0.02em;
         }
 
-        h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+        h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
         
         .section-title {
             font-size: clamp(2rem, 5vw, 4rem);
@@ -90,22 +90,37 @@
             line-height: 1.6;
         }
 
-        /* LAYOUTS HERO */
+        /* LAYOUTS HERO - Version optimisée pour l'espace */
         .hero-layout {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 40px;
+            gap: 20px; /* Réduit l'espace entre le texte et l'image */
         }
 
         .hero-layout > div:first-child {
             flex: 1;
-            max-width: 550px;
+            max-width: 500px; /* Réduit légèrement pour laisser de l'air */
             min-width: 320px;
         }
 
+        /* Ajustements internes pour gagner de la hauteur */
+        .hero-layout h1 { 
+            margin-bottom: 15px !important; 
+        }
+        
+        .hero-layout p { 
+            margin-bottom: 10px !important; 
+            font-size: 1.1rem !important; 
+        }
+
+        .hero-layout ul { 
+            margin-top: 10px !important; 
+            margin-bottom: 20px !important; 
+        }
+
         .hero-layout > div:last-child {
-            flex: 0 0 350px;
+            flex: 0 0 320px; /* L'image prend un peu moins de place */
         }
 
         .hero-img-thin-cyan {
@@ -113,13 +128,13 @@
             box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8) !important;
             filter: grayscale(1);
             width: 100% !important;
-            max-width: 450px;
+            max-width: 380px; /* Image un peu plus petite pour remonter le bouton */
             margin-right: 0 !important;
             margin-left: auto;
             display: block;
             transition: 0.3s ease;
         }
-
+        
         /* COMPOSANTS CARTES */
         .card {
             background: rgba(255, 255, 255, 0.02);
