@@ -184,16 +184,25 @@ p, li, footer {
 }
 
 .btn-cta {
-    background: var(--accent);
-    color: #05051a;
+    background: transparent; /* On vide le fond */
+    color: var(--accent); /* Le texte prend la couleur cyan */
     padding: 14px 32px;
     text-decoration: none;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
+    border: 2px solid var(--accent); /* On ajoute la bordure cyan */
     border-radius: 999px;
-    transition: 0.25s ease;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
+.btn-cta:hover {
+    background: var(--accent); /* Le fond se remplit au survol */
+    color: #05051a; /* Le texte repasse en sombre pour être lisible */
+    box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4); /* Effet lumineux */
+    transform: translateY(-2px); /* Petit saut dynamique */
+}
+    
 .diag-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Force les 3 colonnes */
