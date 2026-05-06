@@ -9,142 +9,605 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
+
+    /* 1. Importation de la police moderne */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
-/* RESET & BASE */
+
+
+/* 2. Application à TOUT le site pour éviter les mélanges */
+
 * {
+
     font-family: 'Inter', sans-serif !important;
-    margin: 0; padding: 0; box-sizing: border-box;
+
 }
+
+    
 
 :root {
-    --bg-1: #05051a; --bg-2: #080826; --bg-3: #030312;
-    --text: #ffffff; --accent: #00f2ff;
+
+    --bg-1: #05051a;
+
+    --bg-2: #080826;
+
+    --bg-3: #030312;
+
+    --text: #ffffff;
+
+    --accent: #00f2ff;
+
     --border-white: 3px solid #ffffff;
+
     --shadow-white: 8px 8px 0px #ffffff;
+
 }
 
-html { 
-    scroll-behavior: smooth; 
-    scroll-snap-type: y mandatory; 
-}
+
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+
+html { scroll-behavior: smooth; }
+
+
 
 body {
+
     color: var(--text);
+
+    font-family: 'Space Grotesk', sans-serif;
+
+    font-weight: 300;
+
+    scroll-snap-type: y mandatory;
+
+    overflow-y: scroll;
+
     background-color: var(--bg-1);
+
     -webkit-font-smoothing: antialiased;
+
 }
 
-/* SECTIONS (PC) */
-section {
-    height: 100vh; /* Fixe pour l'effet slide */
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-    overflow: hidden;
-    padding: 40px;
+
+
+@media (max-width: 768px) {
+
+    body { scroll-snap-type: none; }
+
 }
+
+
+
+section {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 80px 40px;
+
+    scroll-snap-align: start;
+
+    position: relative;
+
+}
+
+
 
 .container {
+
     max-width: 1200px;
+
     width: 100%;
+
     margin: 0 auto;
+
 }
 
-/* TYPOGRAPHIE & ANIMATION (SLIDE 4 / REVEAL) */
-h1, h2, h3 { font-family: 'Syne', sans-serif !important; text-transform: uppercase; line-height: 0.9; }
+
+
+/* TYPOGRAPHIE */
+
+h1, h2, h3, .label-style {
+
+    font-family: 'Syne', sans-serif;
+
+    text-transform: uppercase;
+
+    line-height: 0.9;
+
+    letter-spacing: -0.02em;
+
+}
+
+
+
 h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
 
-.reveal-underline { position: relative; display: inline-block; }
-.reveal-underline::after {
-    content: ""; position: absolute; left: 0; bottom: -5px;
-    width: 0%; height: 4px; background-color: var(--accent);
-    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
-}
-[data-aos].aos-animate .reveal-underline::after { width: 100% !important; }
+.section-title {
 
-.strike-accent {
-    text-decoration: line-through;
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 5px;
+    font-size: clamp(2rem, 5vw, 4rem);
+
+    text-align: center;
+
+    margin-bottom: 40px;
+
 }
+
+
+
+p, li, footer {
+
+    font-family: 'Space Grotesk', sans-serif;
+
+    font-weight: 300;
+
+    line-height: 1.6;
+
+}
+
+
 
 /* LAYOUTS */
+
 .hero-layout {
-    display: flex;
-    align-items: center; /* Important pour le Slide 1 et 5 */
+
+    display: flex; /* On passe en Flex pour mieux contrôler l'espace */
+
     justify-content: space-between;
-    gap: 60px;
-    width: 100%;
+
+    align-items: center;
+
+    gap: 40px;
+
 }
 
-.diag-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+
+
+.hero-layout > div:first-child {
+
+    flex: 1;
+
+    max-width: 550px;
+
+    min-width: 320px;
+
 }
+
+
+
+.hero-layout > div:last-child {
+
+    flex: 0 0 350px;
+
+}
+
+
+
+.hero-img-thin-cyan {
+
+    border: 3px solid var(--accent) !important;
+
+    box-shadow: 8px 8px 0px #ffffff !important; 
+
+    filter: grayscale(1);
+
+    width: 100% !important;
+
+    height: auto;
+
+    display: block;
+
+}
+
+    
+
+/* ÉLÉMENTS DESIGN IMAGE (SLIDE 1) */
+
+.hero-img-thin-cyan {
+
+    border: 3px solid var(--accent) !important;
+
+    /* Modification ici : 255, 255, 255 correspond au blanc */
+
+    box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8) !important; 
+
+    filter: grayscale(1);
+
+    width: 100% !important;
+
+    max-width: 450px;
+
+    margin-right: 0 !important;
+
+    margin-left: auto;
+
+    display: block;
+
+    transition: 0.3s ease;
+
+}
+
+    
+
+/* CARTES (SLIDE 2) */
 
 .card {
+
     background: rgba(255, 255, 255, 0.02);
+
     border: var(--border-white);
+
     padding: 40px;
+
     box-shadow: var(--shadow-white);
-    transition: 0.4s ease;
+
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    text-align: center;
+
 }
 
-/* BOUTON */
-.btn-cta {
+
+
+.card:hover {
+
+    transform: translate(-10px, -10px);
+
+    box-shadow: 15px 15px 0px var(--accent);
+
+    border-color: var(--accent);
+
+}
+
+
+
+/* ANIMATION SOULIGNEMENT (SLIDE 2) */
+
+.reveal-underline {
+
+    position: relative;
+
     display: inline-block;
+
+}
+
+
+
+.reveal-underline::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -5px;
+
+    width: 0%;
+
+    height: 4px;
+
+    background-color: var(--accent);
+
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+
+}
+
+
+
+[data-aos].aos-animate .reveal-underline::after {
+
+    width: 100% !important;
+
+}
+
+
+
+/* AUTRES ÉLÉMENTS */
+
+.label-style { font-size: 0.9rem; font-weight: 800; letter-spacing: 4px; }
+
+
+
+.pivot-row {
+
+    display: grid;
+
+    grid-template-columns: 200px 1fr;
+
+    gap: 40px;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    align-items: baseline;
+
+}
+
+
+
+.offer-box {
+
+    background: rgba(255, 255, 255, 0.02);
+
+    padding: 60px;
+
+    border: var(--border-white);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: var(--shadow-white);
+
+    gap: 40px;
+
+}
+
+
+
+/* 1. État de repos : Épuré et Professionnel */
+
+.btn-cta {
+
+    display: inline-block;
+
+    background: transparent;
+
     color: var(--accent) !important;
-    padding: 16px 36px;
+
+    padding: 14px 32px;
+
     text-decoration: none;
+
     text-transform: uppercase;
+
     font-weight: 700;
+
     border: 2px solid var(--accent);
-    border-radius: 999px;
+
+    border-radius: 999px; /* Bords arrondis comme souhaité */
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    cursor: pointer;
+
+    font-family: 'Inter', sans-serif !important;
+
+}
+
+
+
+/* 2. État de survol : L'impact Rebelle */
+
+.btn-cta:hover {
+
+    background: var(--accent) !important;
+
+    color: #05051a !important; /* Retour au noir pour la lisibilité */
+
+    box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4);
+
+    transform: translateY(-2px);
+
+}
+
+    
+
+.diag-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr); /* Force les 3 colonnes */
+
+    gap: 30px;
+
+    margin-top: 50px;
+
+}
+
+    
+
+ul { list-style: none; margin-top: 25px; padding-left: 0; }
+
+ul li::before { content: "→ "; color: var(--accent); margin-right: 6px; }
+
+
+
+footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
+
+
+
+@media (max-width: 960px) {
+
+    /* Slide 1 et les lignes de pivot s'empilent */
+
+    .hero-layout, .pivot-row, .offer-box { 
+
+        display: flex;
+
+        flex-direction: column;
+
+        text-align: center; 
+
+    }
+
+
+
+    /* Le Slide 2 (diag-grid) passe en 1 colonne sur mobile uniquement */
+
+    .diag-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+
+    .hero-img-thin-cyan { 
+
+        width: 100% !important; 
+
+        max-width: 320px;
+
+        margin: 20px auto !important; 
+
+    }
+
+    
+
+    section { height: auto; padding: 60px 20px; }
+
+}
+
+
+
+/* 1. Le conteneur avec marges pour centrer */
+
+.slider-wrapper {
+
+    display: flex;
+
+    gap: 30px;
+
+    overflow-x: hidden; /* On cache la barre pour que ce soit propre */
+
+    scroll-behavior: smooth;
+
+    padding: 40px 0;
+
+    width: 100%;
+
+}
+
+
+
+.slider-item {
+
+    flex: 0 0 100%; /* Par défaut, une carte prend toute la place */
+
+    display: flex;
+
+    justify-content: center; /* Centre la carte interne */
+
+}
+
+
+
+.slider-item .card {
+
+    width: 100%;
+
+    max-width: 500px; /* La carte elle-même ne dépasse pas 500px */
+
+    margin: 0 auto;
+
+}
+
+
+
+@media (min-width: 960px) {
+
+    .slider-item {
+
+        flex: 0 0 100%; /* Garde une carte à la fois pour l'effet Focus */
+
+    }
+
+}   
+
+    /* Activation du mode Slide par Slide */
+
+html {
+
+    scroll-snap-type: y mandatory;
+
+}
+
+
+
+section {
+
+    scroll-snap-align: start;
+
+    scroll-snap-stop: always;
+
+    height: 100vh; /* Chaque section prend exactement l'écran */
+
+    overflow: hidden; /* Empêche le scroll interne désordonné */
+
+}
+
+
+
+/* Navigation latérale (les petits points) */
+
+.nav-dots {
+
+    position: fixed;
+
+    right: 30px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    z-index: 1000;
+
+}
+
+
+
+.dot {
+
+    width: 12px;
+
+    height: 12px;
+
+    border: 2px solid var(--accent);
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    cursor: pointer;
+
     transition: 0.3s;
+
 }
-.btn-cta:hover { background: var(--accent) !important; color: #05051a !important; }
 
-/* DOTS */
-.nav-dots { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
-.dot { width: 12px; height: 12px; border: 2px solid var(--accent); border-radius: 50%; cursor: pointer; }
-.dot.active { background: var(--accent); transform: scale(1.3); }
 
-/* --- CORRECTIF MOBILE (CIBLÉ) --- */
-@media (max-width: 768px) {
-    html { scroll-snap-type: none !important; }
-    
-    section {
-        height: auto !important; /* Libère la hauteur */
-        min-height: 100vh;
-        padding: 80px 20px !important;
-        display: flex !important; /* Garde le flex pour le centrage */
-        flex-direction: column !important;
-        justify-content: center !important;
-    }
 
-    .hero-layout {
-        flex-direction: column !important;
-        text-align: center;
-        gap: 40px;
-    }
+.dot.active {
 
-    .diag-grid { grid-template-columns: 1fr !important; }
+    background: var(--accent);
 
-    h1 { font-size: 2.8rem !important; }
-    
-    /* On s'assure que le logo/image du slide 1 et 5 ne mangent pas tout */
-    .hero-layout > div { width: 100% !important; }
-    img { max-width: 280px !important; margin: 0 auto; }
+    transform: scale(1.3);
 
-    .nav-dots { display: none !important; }
 }
+
+    
+
 </style>
-
+    
 </head>
 <body>
 
