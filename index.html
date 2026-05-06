@@ -351,7 +351,7 @@
                     </ul>
                 </div>
 
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">STABILISER MES REVENUS</a>
+                <a href="https://cal.com/miora-rasolofo" class="btn-cta">Stabiliser mes revenus</a>
                 
                 <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
                     30 minutes en visio pour faire le point sur ta situation, sans pression.
@@ -527,7 +527,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">Prendre le contrôle du moteur</a>
+                <a href="https://cal.com/miora-rasolofo" class="btn-cta">Réserver mon diagnostic</a>
             </div>
 
             <div data-aos="fade-left" style="flex: 1; display: flex; justify-content: center; position: relative;">
@@ -632,5 +632,37 @@
             });
         });
     </script>
+
+    <!-- Script Cal.com : Intégration invisible et fluide -->
+<script>
+  (function (C, A, L) { 
+    let p = function (a, ar) { a.q.push(ar); }; 
+    let d = C.document; C.Cal = C.Cal || function () { 
+      let cal = C.Cal; let ar = arguments; if (!cal.q) { cal.q = []; } p(cal, ar); 
+    }; 
+    let js = d.createElement("script"); js.async = true; 
+    js.src = "https://app.cal.com/embed/embed.js"; 
+    d.head.appendChild(js); 
+    
+    C.Cal("init", { origin: "https://cal.com" });
+    
+    // Personnalisation aux couleurs de ton identité Rebelle/Héros
+    C.Cal("ui", { 
+      theme: "dark", 
+      styles: { 
+        branding: { brandColor: "#00f2ff" } // Ton cyan d'accentuation
+      },
+      hideEventTypeDetails: false,
+      layout: "month_view"
+    });
+  })(window, "Cal");
+
+  // Liaison : lie tous les éléments avec la classe .btn-cta à ton calendrier
+  Cal("link", {
+    link: "miora-rasolofo",
+    target: ".btn-cta"
+  });
+</script>
+    
 </body>
 </html>
