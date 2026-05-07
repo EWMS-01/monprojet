@@ -305,6 +305,20 @@
             body { scroll-snap-type: none; }
         }
     </style>
+
+    <!-- Cal element-click embed code begins -->
+<script type="text/javascript">
+  (function (C, A, L) { _pbq = L; if (!C._unp) { C.Cal = function () { var s = arguments; var e = Array.prototype.slice.call(s); if (!C.Cal.q) { C.Cal.q = [] } C.Cal.q.push(e) }; C.Cal.ns = {}; C.Cal.ns[L] = C.Cal(); C.Cal.ns[L].q = C.Cal.q; C.Cal._unp = true } })(window, "https://app.cal.com/embed/embed.js", "cal");
+  
+  // Initialisation du popup
+  cal("init", { origin: "https://app.cal.com" });
+
+  // Configuration pour que tous les boutons avec la classe .btn-cta ouvrent le popup
+  cal("ui", {"styles":{"branding":{"brandColor":"#00f2ff"}},"hideEventTypeDetails":false,"layout":"month_view"});
+</script>
+<!-- Cal element-click embed code ends -->
+
+    
 </head>
 <body>
 
@@ -350,8 +364,13 @@
                         <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> rester toi‑même, sans jouer un personnage.</li>
                     </ul>
                 </div>
-
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">Stabiliser mes revenus</a>
+                <a href="https://cal.com/miora-rasolofo" 
+   class="btn-cta" 
+   data-cal-link="miora-rasolofo" 
+   data-cal-config='{"layout":"month_view"}'>
+   Stabiliser mes revenus
+</a>
+    
                 
                 <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
                     30 minutes en visio pour faire le point sur ta situation, sans pression.
