@@ -307,25 +307,19 @@
         
    </style>
 
-    <!-- Cal element-click embed code begins -->
-    <script type="text/javascript">
-      (function (C, A, L) { _pbq = L; if (!C._unp) { C.Cal = function () { var s = arguments; var e = Array.prototype.slice.call(s); if (!C.Cal.q) { C.Cal.q = [] } C.Cal.q.push(e) }; C.Cal.ns = {}; C.Cal.ns[L] = C.Cal(); C.Cal.ns[L].q = C.Cal.q; C.Cal._unp = true } })(window, "https://app.cal.com/embed/embed.js", "cal");
-      
-      // 1. Initialisation unique
-      cal("init", { origin: "https://app.cal.com" });
+  <!-- Cal element-click embed code begins -->
+<script type="text/javascript">
+  (function (C, A, L) { _pbq = L; if (!C._unp) { C.Cal = function () { var s = arguments; var e = Array.prototype.slice.call(s); if (!C.Cal.q) { C.Cal.q = [] } C.Cal.q.push(e) }; C.Cal.ns = {}; C.Cal.ns[L] = C.Cal(); C.Cal.ns[L].q = C.Cal.q; C.Cal._unp = true } })(window, "https://app.cal.com/embed/embed.js", "cal");
 
-      // 2. Configuration visuelle (Cyan #00f2ff)
-      cal("ui", {"styles":{"branding":{"brandColor":"#00f2ff"}},"hideEventTypeDetails":false,"layout":"month_view"});
+  cal("init", { origin: "https://app.cal.com" });
 
-      // 3. Liaison automatique à TOUS tes boutons avec la classe .btn-cta
-      cal("link", {
-        selector: ".btn-cta",
-        itemProps: {
-          calLink: "miora-rasolofo/30min"
-        }
-      });
-    </script>
-    <!-- Cal element-click embed code ends -->
+  cal("ui", {
+    "styles": {"branding": {"brandColor": "#00f2ff"}},
+    "hideEventTypeDetails": false,
+    "layout": "month_view"
+  });
+</script>
+<!-- Cal element-click embed code ends -->
     
 </head>
     
@@ -374,12 +368,12 @@
                     </ul>
                 </div>
                 
-    <a href="javascript:void(0)" 
-   onclick="Cal('ui', { 'styles': { 'branding': { 'brandColor': '#00f2ff' } } }); Cal('popup', { 'calLink': 'miora-rasolofo/30min' });"
-   class="btn-cta">
-   Stabiliser mes revenus
-</a>
-    
+    <button 
+  data-cal-link="miora-rasolofo/30min" 
+  data-cal-config='{"layout":"month_view"}'
+  class="btn-cta">
+  Stabiliser mes revenus
+</button>
                 
                 <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
                     30 minutes en visio pour faire le point sur ta situation, sans pression.
