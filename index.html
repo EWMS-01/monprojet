@@ -271,21 +271,21 @@
             z-index: 9999;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 12px;
         }
 
         #rdv-modal {
             background: #080826;
             border: 1px solid rgba(0, 242, 255, 0.25);
             box-shadow: 0 0 0 1px rgba(0,242,255,0.08), 0 40px 80px rgba(0,0,0,0.7);
-            max-width: 960px;
+            max-width: 1020px;
             width: 100%;
-            height: min(90vh, 780px);
+            height: min(96vh, 860px);
             position: relative;
             font-family: 'Space Grotesk', sans-serif;
             animation: modalIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 300px 1fr;
             border-radius: 4px;
             overflow: hidden;
         }
@@ -331,76 +331,96 @@
 
         .rdv-tag {
             display: inline-block;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--accent);
-            border: 1px solid rgba(0,242,255,0.3);
-            padding: 5px 12px;
+            border: 1px solid rgba(0,242,255,0.35);
+            padding: 5px 14px;
             border-radius: 999px;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
 
         .rdv-sidebar-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.75rem;
+            font-family: 'Syne', sans-serif !important;
+            font-size: 2.1rem;
             font-weight: 800;
             text-transform: uppercase;
-            line-height: 1.05;
+            line-height: 1.0;
             letter-spacing: -0.03em;
             color: #ffffff;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .rdv-sidebar-desc {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.5);
-            line-height: 1.65;
-            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .rdv-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin-bottom: 28px;
+            opacity: 0.6;
         }
 
         .rdv-pills {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 14px;
         }
 
         .rdv-pill {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-size: 0.85rem;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.65);
+            line-height: 1.3;
         }
 
         .rdv-pill-dot {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background: var(--accent);
             flex-shrink: 0;
+            box-shadow: 0 0 6px rgba(0,242,255,0.5);
         }
 
         .rdv-sidebar-footer {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.25);
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.2);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             border-top: 1px solid rgba(255,255,255,0.06);
-            padding-top: 20px;
+            padding-top: 22px;
         }
 
         /* Panneau droit — calendrier */
         #rdv-cal-panel {
             position: relative;
             overflow: hidden;
-            background: #05051a;
+            background: #06061f;
+            display: flex;
+            flex-direction: column;
         }
 
         #cal-embed {
             width: 100%;
-            height: 100%;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* Force Cal.com iframe to fill panel */
+        #cal-embed iframe {
+            width: 100% !important;
+            height: 100% !important;
+            min-height: 700px;
         }
 
         /* Bouton fermeture */
@@ -509,10 +529,12 @@
                     <span class="rdv-tag">Appel découverte</span>
                     <h2 class="rdv-sidebar-title">30 min<br>pour faire<br>le point</h2>
                     <p class="rdv-sidebar-desc">Sans pression. On regarde ensemble si l'Accélérateur Simple est fait pour toi.</p>
+                    <div class="rdv-divider"></div>
                     <div class="rdv-pills">
                         <div class="rdv-pill"><span class="rdv-pill-dot"></span> Visio · 30 minutes</div>
                         <div class="rdv-pill"><span class="rdv-pill-dot"></span> Aucun engagement</div>
-                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Réponse claire & directe</div>
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Réponse directe à ta situation</div>
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Si ce n'est pas fait pour toi, je te le dis</div>
                     </div>
                 </div>
                 <p class="rdv-sidebar-footer">Miora · Architecte de Systèmes</p>
