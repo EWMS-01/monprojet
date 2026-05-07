@@ -12,7 +12,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* 1. Importation et Reset */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
         :root {
@@ -25,12 +24,10 @@
             --shadow-white: 8px 8px 0px #ffffff;
         }
 
-/* 1. Reset et Typographie de base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Suppression du font-family !important ici pour laisser respirer tes titres */
         }
 
         html {
@@ -40,7 +37,6 @@
 
         body {
             color: var(--text);
-            /* On définit Space Grotesk par défaut pour tout le site */
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 300;
             overflow-x: hidden;
@@ -48,13 +44,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* On force la Syne uniquement pour les titres */
         h1, h2, h3, .label-style, .massive-title {
             font-family: 'Syne', sans-serif !important;
         }
 
         section {
-            min-height: 100vh; /* Minimum toute la hauteur de l'écran */
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -62,16 +57,14 @@
             scroll-snap-align: start;
             scroll-snap-stop: always;
             position: relative;
-            /* height: 100vh; <-- SUPPRIMÉ pour éviter de couper le contenu sur petit écran */
-            /* overflow: hidden; <-- SUPPRIMÉ pour permettre le défilement si le texte est long */
         }
+
         .container {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
         }
 
-        /* TYPOGRAPHIE */
         h1, h2, h3, .label-style {
             font-family: 'Syne', sans-serif;
             text-transform: uppercase;
@@ -80,7 +73,7 @@
         }
 
         h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
-        
+
         .section-title {
             font-size: clamp(2rem, 5vw, 4rem);
             text-align: center;
@@ -93,37 +86,25 @@
             line-height: 1.6;
         }
 
-        /* LAYOUTS HERO - Version optimisée pour l'espace */
         .hero-layout {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px; /* Réduit l'espace entre le texte et l'image */
+            gap: 20px;
         }
 
         .hero-layout > div:first-child {
             flex: 1;
-            max-width: 500px; /* Réduit légèrement pour laisser de l'air */
+            max-width: 500px;
             min-width: 320px;
         }
 
-        /* Ajustements internes pour gagner de la hauteur */
-        .hero-layout h1 { 
-            margin-bottom: 15px !important; 
-        }
-        
-        .hero-layout p { 
-            margin-bottom: 10px !important; 
-            font-size: 1.1rem !important; 
-        }
-
-        .hero-layout ul { 
-            margin-top: 10px !important; 
-            margin-bottom: 20px !important; 
-        }
+        .hero-layout h1 { margin-bottom: 15px !important; }
+        .hero-layout p { margin-bottom: 10px !important; font-size: 1.1rem !important; }
+        .hero-layout ul { margin-top: 10px !important; margin-bottom: 20px !important; }
 
         .hero-layout > div:last-child {
-            flex: 0 0 320px; /* L'image prend un peu moins de place */
+            flex: 0 0 320px;
         }
 
         .hero-img-thin-cyan {
@@ -131,14 +112,13 @@
             box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8) !important;
             filter: grayscale(1);
             width: 100% !important;
-            max-width: 380px; /* Image un peu plus petite pour remonter le bouton */
+            max-width: 380px;
             margin-right: 0 !important;
             margin-left: auto;
             display: block;
             transition: 0.3s ease;
         }
-        
-        /* COMPOSANTS CARTES */
+
         .card {
             background: rgba(255, 255, 255, 0.02);
             border: var(--border-white);
@@ -174,7 +154,6 @@
             width: 100% !important;
         }
 
-        /* GRID & OFFRES */
         .label-style { font-size: 0.9rem; font-weight: 800; letter-spacing: 4px; }
 
         .pivot-row {
@@ -218,6 +197,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             font-family: 'Inter', sans-serif !important;
+            font-size: 1rem;
         }
 
         .btn-cta:hover {
@@ -276,10 +256,119 @@
             transform: scale(1.3);
         }
 
-        /* LISTES & FOOTER */
         ul { list-style: none; margin-top: 25px; padding-left: 0; }
         ul li::before { content: "→ "; color: var(--accent); margin-right: 6px; }
         footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
+
+        /* POP-UP */
+        #rdv-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 26, 0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #rdv-modal {
+            background: #080826;
+            border: 3px solid #ffffff;
+            box-shadow: 8px 8px 0px #ffffff;
+            max-width: 560px;
+            width: 90%;
+            padding: 40px;
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+            animation: modalIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.92) translateY(16px); opacity: 0; }
+            to   { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        #rdv-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            cursor: pointer;
+            opacity: 0.6;
+            line-height: 1;
+            transition: opacity 0.2s;
+        }
+
+        #rdv-close:hover { opacity: 1; }
+
+        .rdv-label {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .rdv-title {
+            font-family: 'Syne', sans-serif !important;
+            color: #ffffff;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            line-height: 1.1;
+        }
+
+        .rdv-desc {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .rdv-info {
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            padding: 16px 20px;
+            margin-bottom: 28px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .rdv-btn {
+            display: block;
+            text-align: center;
+            background: transparent;
+            color: var(--accent);
+            padding: 16px 32px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 700;
+            border: 2px solid var(--accent);
+            border-radius: 999px;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .rdv-btn:hover {
+            background: var(--accent);
+            color: #05051a;
+            box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4);
+        }
+
+        .rdv-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         /* RESPONSIVE */
         @media (max-width: 960px) {
@@ -320,15 +409,28 @@
         <div class="dot" onclick="scrollToSection(5)"></div>
     </div>
 
+    <!-- POP-UP RDV -->
+    <div id="rdv-overlay">
+        <div id="rdv-modal">
+            <button id="rdv-close" onclick="closeRdv()">✕</button>
+            <p class="rdv-label">Réserver un appel</p>
+            <h2 class="rdv-title">30 minutes pour faire le point</h2>
+            <p class="rdv-desc">Sans pression. Je te dis clairement si l'Accélérateur Simple est adapté pour toi.</p>
+            <div class="rdv-info">⚡ Visio · 30 min · Aucun engagement</div>
+            <a href="https://cal.com/miora-rasolofo" target="_blank" class="rdv-btn">Choisir mon créneau →</a>
+            <p class="rdv-note">Aucun engagement. Juste de la clarté.</p>
+        </div>
+    </div>
+
     <!-- SLIDE 1 : HERO -->
     <section style="background-color: var(--bg-1); overflow: hidden;">
         <div class="container hero-layout" style="align-items: flex-start;">
-            
+
             <div data-aos="fade-right" style="max-width: 550px;">
                 <h1 class="massive-title" style="font-size: clamp(2.5rem, 6vw, 4.2rem);">
                     Arrête de <br><span class="strike-accent">bricoler</span> <br>ton coaching.
                 </h1>
-                
+
                 <div style="margin: 40px 0; border-left: 5px solid var(--accent); padding-left: 20px;">
                     <p style="font-size: 1.25rem; line-height: 1.5; font-weight: 400;">
                         Tu es coach, tu as déjà des clientes, mais tes revenus font le yo‑yo parce que ton message, ton offre et ton acquisition ne parlent pas le même langage.
@@ -351,8 +453,8 @@
                     </ul>
                 </div>
 
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">STABILISER MES REVENUS</a>
-                
+                <button onclick="openRdv()" class="btn-cta">STABILISER MES REVENUS</button>
+
                 <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
                     30 minutes en visio pour faire le point sur ta situation, sans pression.
                 </p>
@@ -360,7 +462,7 @@
 
             <div data-aos="zoom-in" style="flex-shrink: 0; position: relative;">
                 <div style="position: absolute; top: -15px; right: -15px; width: 100%; height: 100%; border: 2px solid var(--accent); z-index: 0;"></div>
-                <img src="Cheval.png" alt="Miora Architecture" 
+                <img src="Cheval.png" alt="Miora Architecture"
                      style="max-width: 400px; display: block; position: relative; z-index: 1; filter: grayscale(1) contrast(1.3) brightness(0.8); border: var(--border-white); background-color: var(--bg-1);">
                 <div style="position: absolute; bottom: 20px; left: -20px; background: var(--accent); color: #000; padding: 10px 20px; font-weight: 800; font-family: 'Syne'; z-index: 2; transform: rotate(-2deg); font-size: 0.8rem; text-transform: uppercase;">
                     Système & Architecture
@@ -380,7 +482,7 @@
                         <img src="yoyo.gif" alt="Revenu en yo-yo" style="width: 72px; height: 72px; object-fit: contain;">
                     </div>
                     <h3 style="color: var(--accent);">Le Yo-Yo</h3>
-                    <p>Tes revenus sont imprévisibles, tu as déjà des clientes mais pas de base stable, alors tu vis dans l’incertitude, pas dans un business qui te tient debout.</p>
+                    <p>Tes revenus sont imprévisibles, tu as déjà des clientes mais pas de base stable, alors tu vis dans l'incertitude, pas dans un business qui te tient debout.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="250">
@@ -388,7 +490,7 @@
                         <img src="Bricolage.gif" alt="Bricolage de communication" style="width: 72px; height: 72px; object-fit: contain;">
                     </div>
                     <h3 style="color: var(--accent);">Le Bricolage</h3>
-                    <p>Tu es partout, tu testes des idées, tu ne sais pas ce qui génère réellement tes ventes et tu sautes d’une idée à l’autre comme si tu jouais au marketing plutôt qu’à ton business.</p>
+                    <p>Tu es partout, tu testes des idées, tu ne sais pas ce qui génère réellement tes ventes et tu sautes d'une idée à l'autre comme si tu jouais au marketing plutôt qu'à ton business.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="400">
@@ -396,13 +498,13 @@
                         <img src="fatigue.gif" alt="Fatigue" style="width: 72px; height: 72px; object-fit: contain;">
                     </div>
                     <h3 style="color: var(--accent);">La Fatigue</h3>
-                    <p>Tu en as assez de te vider à “trouver des clients” pendant que ton business ne tient pas debout, tu veux un système robuste qui respecte ton énergie, pas un second job à plein temps.</p>
+                    <p>Tu en as assez de te vider à "trouver des clients" pendant que ton business ne tient pas debout, tu veux un système robuste qui respecte ton énergie, pas un second job à plein temps.</p>
                 </div>
             </div>
 
             <p data-aos="fade-up" data-aos-delay="600" style="margin-top: 60px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 300; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; color: var(--text);">
                 Tu n'as pas besoin d'une énième stratégie miracle,<br>
-                <span class="reveal-underline">tu as besoin d’un système qui tient la route.</span>
+                <span class="reveal-underline">tu as besoin d'un système qui tient la route.</span>
             </p>
         </div>
     </section>
@@ -414,7 +516,7 @@
                 <div class="pivot-row" style="margin-bottom: 100px; align-items: flex-start;">
                     <span class="label-style" style="opacity: 0.3;">LE CONSTAT</span>
                     <p style="font-size: 1.25rem; font-weight: 300; opacity: 0.4; max-width: 500px; line-height: 1.6;">
-                        Le marketing qui s’essouffle, le bricolage permanent et les revenus qui font le yo‑yo.
+                        Le marketing qui s'essouffle, le bricolage permanent et les revenus qui font le yo‑yo.
                         Tu as déjà des clientes, mais tout ton business dépend encore de ton dernier post, de ta dernière idée, ou de ton dernier essai.
                     </p>
                 </div>
@@ -426,7 +528,7 @@
                             Bâtir un système <span style="font-weight: 700; color: var(--accent);">architectural</span> qui travaille pour toi, pas contre toi.
                         </h3>
                         <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.7;">
-                            On remplace l’agitation par la structure, pour que ton business ne dépende plus de ton dernier post, mais de tes fondations.
+                            On remplace l'agitation par la structure, pour que ton business ne dépende plus de ton dernier post, mais de tes fondations.
                         </p>
                     </div>
                 </div>
@@ -439,38 +541,38 @@
         <div class="container">
             <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
             <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
-                4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d’appel régulières sans cirque marketing.
+                4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d'appel régulières sans cirque marketing.
             </p>
 
             <div id="prog-slider" class="slider-wrapper">
                 <div class="slider-item">
                     <div class="card" data-aos="fade-up" data-aos-delay="100" style="height: 100%;">
                         <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">01. Clarté</h3>
-                        <p style="margin-top: 15px; font-weight: 300;">On définit exactement à qui tu t’adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu’une autre.</p>
+                        <p style="margin-top: 15px; font-weight: 300;">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class="card" data-aos="fade-up" data-aos-delay="200" style="height: 100%;">
                         <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">02. Message</h3>
-                        <p style="margin-top: 15px; font-weight: 300;">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l’appel et ce que tu mets en avant sans te perdre.</p>
+                        <p style="margin-top: 15px; font-weight: 300;">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class="card" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
                         <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">03. Système</h3>
-                        <p style="margin-top: 15px; font-weight: 300;">On construit ton mini‑système d’acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
+                        <p style="margin-top: 15px; font-weight: 300;">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class="card" data-aos="fade-up" data-aos-delay="400" style="height: 100%;">
                         <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">04. Action</h3>
-                        <p style="margin-top: 15px; font-weight: 300;">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d’appel presque automatiquement.</p>
+                        <p style="margin-top: 15px; font-weight: 300;">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
                     </div>
                 </div>
             </div>
 
             <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
-                Ce n’est pas pour toi si tu cherches une solution miracle ou si tu n’es pas prête à faire ta part du travail pendant 30 jours.
+                Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.
             </p>
         </div>
     </section>
@@ -482,7 +584,7 @@
                 <div>
                     <h2 style="font-size: clamp(2rem, 4vw, 3.5rem);">L'Accélérateur Simple</h2>
                     <p style="font-size: 1.1rem; margin-top: 15px; opacity: 0.8; max-width: 500px;">
-                        4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d’appel régulières sans cirque marketing.
+                        4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d'appel régulières sans cirque marketing.
                     </p>
                     <p style="font-size: 0.9rem; margin-top: 20px; color: var(--accent);">Tarif : 800€ · Possibilité de 2×400€</p>
                 </div>
@@ -491,7 +593,7 @@
                         800&nbsp;€
                     </div>
                     <div style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 18px;">1 mois · 4 sessions de 30 minutes</div>
-                    <a href="https://cal.com/miora-rasolofo" class="btn-cta">Réserver un appel</a>
+                    <button onclick="openRdv()" class="btn-cta">Réserver un appel</button>
                 </div>
             </div>
         </div>
@@ -507,11 +609,11 @@
                     J'accompagne les coachs à stabiliser leurs revenus via des <span style="color: var(--accent); font-weight: 700;">systèmes simples, indépendants et durables.</span>
                 </p>
                 <p style="font-size: 1.1rem; opacity: 0.7; line-height: 1.8; font-weight: 400; max-width: 500px; margin-bottom: 35px;">
-                    Après avoir construit des architectures complexes pour de gros business, j’ai choisi de revenir à l’essentiel : <strong>l’efficacité sans le cirque marketing.</strong>
+                    Après avoir construit des architectures complexes pour de gros business, j'ai choisi de revenir à l'essentiel : <strong>l'efficacité sans le cirque marketing.</strong>
                 </p>
 
                 <div style="margin-bottom: 50px; background: rgba(255,255,255,0.02); padding: 30px; border-left: 2px solid var(--accent);">
-                    <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 20px;">Je t’aide à :</p>
+                    <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 20px;">Je t'aide à :</p>
                     <ul style="list-style: none; display: grid; gap: 15px; font-size: 1.1rem; line-height: 1.4;">
                         <li style="display: flex; align-items: flex-start;">
                             <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[01]</span>
@@ -519,7 +621,7 @@
                         </li>
                         <li style="display: flex; align-items: flex-start;">
                             <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[02]</span>
-                            <span>Parler de ton coaching d’une façon <strong>claire et assumée</strong>.</span>
+                            <span>Parler de ton coaching d'une façon <strong>claire et assumée</strong>.</span>
                         </li>
                         <li style="display: flex; align-items: flex-start;">
                             <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[03]</span>
@@ -527,7 +629,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">Prendre le contrôle du moteur</a>
+                <button onclick="openRdv()" class="btn-cta">Prendre le contrôle du moteur</button>
             </div>
 
             <div data-aos="fade-left" style="flex: 1; display: flex; justify-content: center; position: relative;">
@@ -548,59 +650,52 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; position: relative;">
                 <div class="card" data-aos="fade-up" data-aos-delay="100" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
                     <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">01. INPUT</div>
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu m’écris</h3>
-                    <p style="opacity: 0.8; line-height: 1.6;">Tu m’envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.</p>
+                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu m'écris</h3>
+                    <p style="opacity: 0.8; line-height: 1.6;">Tu m'envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="250" style="border-top: 4px solid var(--accent); padding: 40px; background: rgba(0,242,255,0.03);">
                     <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">02. ANALYSE</div>
                     <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">On se parle</h3>
-                    <p style="opacity: 0.9; line-height: 1.6;">30 minutes en visio pour faire le point, sans pression. Je te dis clairement si <strong>l’Accélérateur Simple</strong> est adapté pour toi.</p>
+                    <p style="opacity: 0.9; line-height: 1.6;">30 minutes en visio pour faire le point, sans pression. Je te dis clairement si <strong>l'Accélérateur Simple</strong> est adapté pour toi.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="400" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
                     <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">03. OUTPUT</div>
                     <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu décides</h3>
-                    <p style="opacity: 0.8; line-height: 1.6;">Si c’est oui, on cale les 4 sessions. Si c’est non, tu repars avec plus de clarté que quand tu es arrivée.</p>
+                    <p style="opacity: 0.8; line-height: 1.6;">Si c'est oui, on cale les 4 sessions. Si c'est non, tu repars avec plus de clarté que quand tu es arrivée.</p>
                 </div>
             </div>
 
             <div style="text-align: center; margin-top: 80px;" data-aos="zoom-in">
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta" style="padding: 20px 50px; font-size: 1.2rem;">Je veux mon plan simple</a>
+                <button onclick="openRdv()" class="btn-cta" style="padding: 20px 50px; font-size: 1.2rem;">Je veux mon plan simple</button>
                 <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.5; letter-spacing: 1px; text-transform: uppercase;">Aucun engagement. Juste de la clarté.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        © 2026 Miora – L’Accélérateur Simple | Architecte de Systèmes
+        © 2026 Miora – L'Accélérateur Simple | Architecte de Systèmes
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-        // 1. Initialisation des animations AOS
+    <script>
+        // 1. Initialisation AOS
         AOS.init({ duration: 1200, once: false });
 
-        // 2. Gestion du Slider (L'Accélérateur)
+        // 2. Gestion du Slider
         const slider = document.getElementById('prog-slider');
         if (slider) {
             const items = slider.querySelectorAll('.slider-item');
-            
             const scrollNext = () => {
-                // On calcule la largeur d'un item + son gap (30px)
                 const step = items[0].offsetWidth + 30;
-                
-                // Si on arrive au bout, on revient au début, sinon on avance
                 if (slider.scrollLeft >= (slider.scrollWidth - slider.offsetWidth - 10)) {
                     slider.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
                     slider.scrollBy({ left: step, behavior: 'smooth' });
                 }
             };
-
             let autoCycle = setInterval(scrollNext, 3000);
-
-            // Pause quand la souris survole pour laisser lire l'utilisateur
             slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
             slider.addEventListener('mouseleave', () => {
                 clearInterval(autoCycle);
@@ -608,7 +703,7 @@
             });
         }
 
-        // 3. Navigation par points (Dots) & Scroll Interactif
+        // 3. Navigation par points
         function scrollToSection(index) {
             const sections = document.querySelectorAll('section');
             sections[index].scrollIntoView({ behavior: 'smooth' });
@@ -618,18 +713,36 @@
             const sections = document.querySelectorAll('section');
             const dots = document.querySelectorAll('.dot');
             let current = 0;
-
             sections.forEach((section, index) => {
-                const sectionTop = section.offsetTop;
-                // On active le point quand la section occupe le milieu de l'écran
-                if (window.scrollY >= sectionTop - window.innerHeight / 3) {
+                if (window.scrollY >= section.offsetTop - window.innerHeight / 3) {
                     current = index;
                 }
             });
-
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === current);
             });
+        });
+
+        // 4. Pop-up RDV
+        function openRdv() {
+            const overlay = document.getElementById('rdv-overlay');
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRdv() {
+            document.getElementById('rdv-overlay').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Fermer en cliquant sur le fond
+        document.getElementById('rdv-overlay').addEventListener('click', function(e) {
+            if (e.target === this) closeRdv();
+        });
+
+        // Fermer avec Échap
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeRdv();
         });
     </script>
 </body>
