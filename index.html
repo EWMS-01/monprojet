@@ -651,6 +651,185 @@
             html { scroll-snap-type: none; }
             body { scroll-snap-type: none; }
         }
+
+        /* ── PROGRAMME FULLSCREEN SLIDES ── */
+        .prog-section {
+            min-height: 100vh;
+            height: 100vh;
+            display: block !important;
+            padding: 0 !important;
+        }
+
+        .prog-slides {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .prog-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.75s cubic-bezier(0.77,0,0.175,1),
+                        transform 0.75s cubic-bezier(0.77,0,0.175,1);
+            pointer-events: none;
+        }
+
+        .prog-slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .prog-slide.exit-up {
+            opacity: 0;
+            transform: translateY(-60px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .prog-slide-inner {
+            max-width: 780px;
+            width: 100%;
+            padding: 0 60px;
+            position: relative;
+        }
+
+        .prog-slide-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 36px;
+        }
+
+        .prog-slide-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.6;
+        }
+
+        .prog-counter {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .prog-slide-title {
+            font-family: 'Syne', sans-serif !important;
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            color: #ffffff;
+            margin-bottom: 32px;
+        }
+
+        .prog-slide-line {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin-bottom: 32px;
+            box-shadow: 0 0 10px rgba(0,242,255,0.5);
+            animation: lineGrow 0.6s cubic-bezier(0.77,0,0.175,1) forwards;
+        }
+
+        @keyframes lineGrow {
+            from { width: 0; }
+            to   { width: 60px; }
+        }
+
+        .prog-slide-body {
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            line-height: 1.75;
+            color: rgba(255,255,255,0.6);
+            font-weight: 300;
+            max-width: 560px;
+            margin-bottom: 48px;
+        }
+
+        .prog-slide-note {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 24px;
+            max-width: 480px;
+        }
+
+        /* Barre verticale de progression */
+        .prog-vbar {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 160px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .prog-vbar-fill {
+            width: 100%;
+            background: var(--accent);
+            height: 25%;
+            transition: height 0.6s cubic-bezier(0.77,0,0.175,1);
+            box-shadow: 0 0 8px rgba(0,242,255,0.5);
+        }
+
+        /* UI dots + arrows */
+        .prog-ui {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .prog-dots-v {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .prog-dot-v {
+            width: 2px;
+            height: 24px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .prog-dot-v.active {
+            height: 44px;
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(0,242,255,0.5);
+        }
+
+        .prog-arrows {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .prog-slide-inner { padding: 0 30px; }
+            .prog-vbar { left: 16px; }
+            .prog-ui { right: 16px; }
+            .prog-slide-title { font-size: clamp(3rem, 14vw, 5rem); }
+        }
     </style>
 </head>
 <body>
@@ -812,53 +991,84 @@
     </section>
 
     <!-- SLIDE 3 : PROGRAMME -->
-    <section style="background-color: var(--bg-3); padding: 100px 0;">
-        <div class="container">
-            <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
-            <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
-                4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d'appel régulières sans cirque marketing.
-            </p>
+    <section class="prog-section" style="background-color: var(--bg-3); padding: 0; overflow: hidden; position: relative;">
 
-            <div class="slider-outer" data-aos="fade-up">
-                <div class="slider-track" id="slide-track">
-                    <div class="slide-card active">
-                        <span class="slide-num">01 — 04</span>
-                        <div class="slide-title">Clarté</div>
-                        <p class="slide-body">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
+        <!-- Slides empilés -->
+        <div class="prog-slides" id="prog-slides">
+
+            <div class="prog-slide active" data-index="0">
+                <div class="prog-slide-inner">
+                    <div class="prog-slide-meta">
+                        <span class="prog-slide-tag">L'Accélérateur · 4 sessions</span>
+                        <span class="prog-counter">01 <span style="opacity:0.3">/ 04</span></span>
                     </div>
-                    <div class="slide-card">
-                        <span class="slide-num">02 — 04</span>
-                        <div class="slide-title">Message</div>
-                        <p class="slide-body">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
-                    </div>
-                    <div class="slide-card">
-                        <span class="slide-num">03 — 04</span>
-                        <div class="slide-title">Système</div>
-                        <p class="slide-body">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
-                    </div>
-                    <div class="slide-card">
-                        <span class="slide-num">04 — 04</span>
-                        <div class="slide-title">Action</div>
-                        <p class="slide-body">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
-                    </div>
+                    <h2 class="prog-slide-title">Clarté</h2>
+                    <div class="prog-slide-line"></div>
+                    <p class="prog-slide-body">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
+                    <p class="prog-slide-note">Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.</p>
                 </div>
             </div>
 
-            <div class="slide-indicators" id="slide-dots">
-                <div class="slide-dot active" onclick="slideTo(0)"></div>
-                <div class="slide-dot" onclick="slideTo(1)"></div>
-                <div class="slide-dot" onclick="slideTo(2)"></div>
-                <div class="slide-dot" onclick="slideTo(3)"></div>
-            </div>
-            <div class="slide-nav">
-                <button class="slide-btn" onclick="slidePrev()">←</button>
-                <button class="slide-btn" onclick="slideNext()">→</button>
+            <div class="prog-slide" data-index="1">
+                <div class="prog-slide-inner">
+                    <div class="prog-slide-meta">
+                        <span class="prog-slide-tag">L'Accélérateur · 4 sessions</span>
+                        <span class="prog-counter">02 <span style="opacity:0.3">/ 04</span></span>
+                    </div>
+                    <h2 class="prog-slide-title">Message</h2>
+                    <div class="prog-slide-line"></div>
+                    <p class="prog-slide-body">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
+                    <p class="prog-slide-note">Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.</p>
+                </div>
             </div>
 
-            <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
-                Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.
-            </p>
+            <div class="prog-slide" data-index="2">
+                <div class="prog-slide-inner">
+                    <div class="prog-slide-meta">
+                        <span class="prog-slide-tag">L'Accélérateur · 4 sessions</span>
+                        <span class="prog-counter">03 <span style="opacity:0.3">/ 04</span></span>
+                    </div>
+                    <h2 class="prog-slide-title">Système</h2>
+                    <div class="prog-slide-line"></div>
+                    <p class="prog-slide-body">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
+                    <p class="prog-slide-note">Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.</p>
+                </div>
+            </div>
+
+            <div class="prog-slide" data-index="3">
+                <div class="prog-slide-inner">
+                    <div class="prog-slide-meta">
+                        <span class="prog-slide-tag">L'Accélérateur · 4 sessions</span>
+                        <span class="prog-counter">04 <span style="opacity:0.3">/ 04</span></span>
+                    </div>
+                    <h2 class="prog-slide-title">Action</h2>
+                    <div class="prog-slide-line"></div>
+                    <p class="prog-slide-body">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
+                    <p class="prog-slide-note">Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.</p>
+                </div>
+            </div>
+
         </div>
+
+        <!-- Barre de progression verticale -->
+        <div class="prog-vbar">
+            <div class="prog-vbar-fill" id="prog-vbar-fill"></div>
+        </div>
+
+        <!-- Indicateurs + nav -->
+        <div class="prog-ui">
+            <div class="prog-dots-v" id="prog-dots-v">
+                <div class="prog-dot-v active" onclick="progSlideTo(0)"></div>
+                <div class="prog-dot-v" onclick="progSlideTo(1)"></div>
+                <div class="prog-dot-v" onclick="progSlideTo(2)"></div>
+                <div class="prog-dot-v" onclick="progSlideTo(3)"></div>
+            </div>
+            <div class="prog-arrows">
+                <button class="slide-btn" onclick="progSlidePrev()">↑</button>
+                <button class="slide-btn" onclick="progSlideNext()">↓</button>
+            </div>
+        </div>
+
     </section>
 
     <!-- SLIDE 4 : L'OFFRE -->
@@ -1005,68 +1215,56 @@
             layout: "month_view"
         });
 
-        // 2. Slider programme
-        let slideCurrent = 0;
-        let slideTimer = null;
-        const SLIDE_DURATION = 4000;
-        const CARD_WIDTH = 340;
-        const CARD_GAP = 24;
+        // 2. Programme fullscreen slides
+        let progSlideIdx = 0;
+        let progSlideTimer = null;
+        const PROG_DURATION = 5000;
+        const TOTAL_SLIDES = 4;
 
-        function slideTo(index) {
-            const track  = document.getElementById('slide-track');
-            const cards  = track.querySelectorAll('.slide-card');
-            const dots   = document.querySelectorAll('.slide-dot');
-            const outer  = track.parentElement;
-            const outerW = outer.offsetWidth;
+        function progSlideTo(index) {
+            const slides  = document.querySelectorAll('.prog-slide');
+            const dots    = document.querySelectorAll('.prog-dot-v');
+            const vfill   = document.getElementById('prog-vbar-fill');
 
-            // Reset toutes les cartes (force le reflow pour relancer l'animation ::before)
-            cards.forEach(c => {
-                c.classList.remove('active');
-                void c.offsetWidth; // reflow
-            });
-            dots.forEach(d => d.classList.remove('active'));
+            // Exit current
+            slides[progSlideIdx].classList.add('exit-up');
+            slides[progSlideIdx].classList.remove('active');
+            setTimeout(() => slides[progSlideIdx].classList.remove('exit-up'), 600);
 
-            cards[index].classList.add('active');
-            dots[index].classList.add('active');
+            progSlideIdx = index;
 
-            // Centrer la carte active
-            const cardOffset = index * (CARD_WIDTH + CARD_GAP);
-            const centerOffset = (outerW / 2) - (CARD_WIDTH / 2) - 80; // 80 = padding
-            const translateX = -cardOffset + centerOffset;
-            track.style.transform = `translateX(${translateX}px)`;
+            // Activate new
+            slides[progSlideIdx].classList.add('active');
 
-            slideCurrent = index;
+            // Dots
+            dots.forEach((d, i) => d.classList.toggle('active', i === progSlideIdx));
 
-            clearInterval(slideTimer);
-            slideTimer = setInterval(() => {
-                slideTo((slideCurrent + 1) % cards.length);
-            }, SLIDE_DURATION);
+            // Vertical bar
+            vfill.style.height = ((progSlideIdx + 1) / TOTAL_SLIDES * 100) + '%';
+
+            // Restart timer
+            clearInterval(progSlideTimer);
+            progSlideTimer = setInterval(() => {
+                progSlideTo((progSlideIdx + 1) % TOTAL_SLIDES);
+            }, PROG_DURATION);
         }
 
-        function slideNext() { slideTo((slideCurrent + 1) % 4); }
-        function slidePrev() { slideTo((slideCurrent + 3) % 4); }
-
-        // Pause on hover
-        const slideOuter = document.querySelector('.slider-outer');
-        if (slideOuter) {
-            slideOuter.addEventListener('mouseenter', () => clearInterval(slideTimer));
-            slideOuter.addEventListener('mouseleave', () => {
-                slideTimer = setInterval(() => slideTo((slideCurrent + 1) % 4), SLIDE_DURATION);
-            });
-        }
+        function progSlideNext() { progSlideTo((progSlideIdx + 1) % TOTAL_SLIDES); }
+        function progSlidePrev() { progSlideTo((progSlideIdx + TOTAL_SLIDES - 1) % TOTAL_SLIDES); }
 
         // Swipe tactile
-        let touchStartX = 0;
-        if (slideOuter) {
-            slideOuter.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-            slideOuter.addEventListener('touchend', e => {
-                const dx = e.changedTouches[0].clientX - touchStartX;
-                if (Math.abs(dx) > 40) dx < 0 ? slideNext() : slidePrev();
+        let progTouchY = 0;
+        const progSection = document.querySelector('.prog-section');
+        if (progSection) {
+            progSection.addEventListener('touchstart', e => { progTouchY = e.touches[0].clientY; }, { passive: true });
+            progSection.addEventListener('touchend', e => {
+                const dy = e.changedTouches[0].clientY - progTouchY;
+                if (Math.abs(dy) > 40) dy < 0 ? progSlideNext() : progSlidePrev();
             });
         }
 
         // Start
-        slideTo(0);
+        progSlideTo(0);
 
         // 3. Navigation par points
         function scrollToSection(index) {
