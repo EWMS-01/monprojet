@@ -265,112 +265,199 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(5, 5, 26, 0.92);
+            background: rgba(3, 3, 18, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 9999;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         #rdv-modal {
             background: #080826;
-            border: 3px solid #ffffff;
-            box-shadow: 8px 8px 0px #ffffff;
-            max-width: 900px;
-            width: 95%;
-            height: 90vh;
-            padding: 44px 0 0 0;
+            border: 1px solid rgba(0, 242, 255, 0.25);
+            box-shadow: 0 0 0 1px rgba(0,242,255,0.08), 0 40px 80px rgba(0,0,0,0.7);
+            max-width: 960px;
+            width: 100%;
+            height: min(90vh, 780px);
             position: relative;
             font-family: 'Space Grotesk', sans-serif;
-            animation: modalIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
+            animation: modalIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            border-radius: 4px;
+            overflow: hidden;
         }
 
         @keyframes modalIn {
-            from { transform: scale(0.92) translateY(16px); opacity: 0; }
+            from { transform: scale(0.94) translateY(20px); opacity: 0; }
             to   { transform: scale(1) translateY(0); opacity: 1; }
         }
 
+        /* Panneau gauche */
+        #rdv-sidebar {
+            background: linear-gradient(160deg, #0a0a2e 0%, #05051a 100%);
+            border-right: 1px solid rgba(0,242,255,0.15);
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #rdv-sidebar::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0,242,255,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        #rdv-sidebar::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(0,242,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .rdv-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(0,242,255,0.3);
+            padding: 5px 12px;
+            border-radius: 999px;
+            margin-bottom: 28px;
+        }
+
+        .rdv-sidebar-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .rdv-sidebar-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.65;
+            margin-bottom: 32px;
+        }
+
+        .rdv-pills {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rdv-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .rdv-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .rdv-sidebar-footer {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 20px;
+        }
+
+        /* Panneau droit — calendrier */
+        #rdv-cal-panel {
+            position: relative;
+            overflow: hidden;
+            background: #05051a;
+        }
+
+        #cal-embed {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Bouton fermeture */
         #rdv-close {
             position: absolute;
             top: 16px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            color: #ffffff;
-            font-size: 22px;
+            right: 16px;
+            z-index: 10;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.6);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
             cursor: pointer;
-            opacity: 0.6;
+            transition: all 0.2s;
             line-height: 1;
-            transition: opacity 0.2s;
         }
 
-        #rdv-close:hover { opacity: 1; }
-
-        .rdv-label {
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.75rem;
-            color: var(--accent);
-            margin-bottom: 12px;
-            font-weight: 700;
+        #rdv-close:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            border-color: rgba(255,255,255,0.25);
         }
 
-        .rdv-title {
-            font-family: 'Syne', sans-serif !important;
-            color: #ffffff;
-            font-size: 1.6rem;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            line-height: 1.1;
-        }
+        /* Responsive mobile */
+        @media (max-width: 700px) {
+            #rdv-modal {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+                height: 95vh;
+                border-radius: 12px 12px 0 0;
+                align-self: flex-end;
+                margin: 0 -20px -20px -20px;
+                width: calc(100% + 40px);
+                max-width: none;
+                animation: modalInMobile 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
 
-        .rdv-desc {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-            margin-bottom: 28px;
-            line-height: 1.5;
-        }
+            @keyframes modalInMobile {
+                from { transform: translateY(40px); opacity: 0; }
+                to   { transform: translateY(0); opacity: 1; }
+            }
 
-        .rdv-info {
-            background: rgba(0, 242, 255, 0.05);
-            border: 1px solid rgba(0, 242, 255, 0.3);
-            padding: 16px 20px;
-            margin-bottom: 28px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.75);
-        }
+            #rdv-sidebar {
+                padding: 28px 24px 20px;
+                border-right: none;
+                border-bottom: 1px solid rgba(0,242,255,0.15);
+            }
 
-        .rdv-btn {
-            display: block;
-            text-align: center;
-            background: transparent;
-            color: var(--accent);
-            padding: 16px 32px;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: 700;
-            border: 2px solid var(--accent);
-            border-radius: 999px;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .rdv-btn:hover {
-            background: var(--accent);
-            color: #05051a;
-            box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4);
-        }
-
-        .rdv-note {
-            text-align: center;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.35);
-            margin-top: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            .rdv-sidebar-title { font-size: 1.3rem; }
+            .rdv-sidebar-desc { display: none; }
+            .rdv-pills { flex-direction: row; flex-wrap: wrap; }
         }
 
         /* RESPONSIVE */
@@ -415,8 +502,28 @@
     <!-- POP-UP RDV -->
     <div id="rdv-overlay">
         <div id="rdv-modal">
-            <button id="rdv-close" onclick="closeRdv()">✕</button>
-            <div id="cal-embed" style="width:100%; height:100%; overflow-y:auto;"></div>
+
+            <!-- Panneau gauche : contexte -->
+            <div id="rdv-sidebar">
+                <div>
+                    <span class="rdv-tag">Appel découverte</span>
+                    <h2 class="rdv-sidebar-title">30 min<br>pour faire<br>le point</h2>
+                    <p class="rdv-sidebar-desc">Sans pression. On regarde ensemble si l'Accélérateur Simple est fait pour toi.</p>
+                    <div class="rdv-pills">
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Visio · 30 minutes</div>
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Aucun engagement</div>
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Réponse claire & directe</div>
+                    </div>
+                </div>
+                <p class="rdv-sidebar-footer">Miora · Architecte de Systèmes</p>
+            </div>
+
+            <!-- Panneau droit : calendrier Cal.com -->
+            <div id="rdv-cal-panel">
+                <button id="rdv-close" onclick="closeRdv()">✕</button>
+                <div id="cal-embed"></div>
+            </div>
+
         </div>
     </div>
 
