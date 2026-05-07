@@ -209,177 +209,172 @@
 
         /* SLIDER */
         /* SLIDER PROGRAMME */
-        .prog-track {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
+        .slider-outer {
+            position: relative;
             margin-top: 60px;
-            position: relative;
-        }
-
-        .prog-card {
-            position: relative;
-            padding: 44px 36px 40px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            border-right: 1px solid rgba(255,255,255,0.06);
-            cursor: pointer;
-            transition: background 0.5s ease;
-            background: transparent;
             overflow: hidden;
         }
 
-        .prog-card:last-child { border-right: none; }
-
-        .prog-card::before {
+        /* Fondu sur les bords */
+        .slider-outer::before,
+        .slider-outer::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0s linear;
-        }
-
-        .prog-card.active::before {
-            transform: scaleX(1);
-            transition: transform 4s linear;
-        }
-
-        .prog-card.active {
-            background: rgba(0,242,255,0.03);
-        }
-
-        .prog-card.visited::before {
-            transform: scaleX(1);
-            transition: none;
-        }
-
-        .prog-glow {
-            position: absolute;
-            top: -80px; left: -80px;
-            width: 200px; height: 200px;
-            background: radial-gradient(circle, rgba(0,242,255,0.06) 0%, transparent 70%);
+            top: 0; bottom: 0;
+            width: 120px;
+            z-index: 2;
             pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s;
+        }
+        .slider-outer::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-3), transparent);
+        }
+        .slider-outer::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-3), transparent);
         }
 
-        .prog-card.active .prog-glow { opacity: 1; }
-
-        .prog-number {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: var(--accent);
-            opacity: 0.5;
-            margin-bottom: 20px;
-            transition: opacity 0.4s;
+        .slider-track {
+            display: flex;
+            gap: 24px;
+            padding: 20px 80px 30px;
+            transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+            will-change: transform;
         }
 
-        .prog-card.active .prog-number { opacity: 1; }
-
-        .prog-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 20px;
-            line-height: 1;
-            transition: color 0.4s;
-        }
-
-        .prog-card.active .prog-title,
-        .prog-card.visited .prog-title { color: #ffffff; }
-
-        .prog-body {
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: rgba(255,255,255,0);
-            max-height: 0;
-            overflow: hidden;
-            transition: color 0.4s, max-height 0.5s ease, margin 0.4s;
-        }
-
-        .prog-card.active .prog-body,
-        .prog-card.visited .prog-body {
-            color: rgba(255,255,255,0.55);
-            max-height: 200px;
-        }
-
-        .prog-arrow {
-            margin-top: 24px;
-            font-size: 1.2rem;
-            color: var(--accent);
-            opacity: 0;
-            transform: translateX(-6px);
-            transition: opacity 0.4s, transform 0.4s;
-        }
-
-        .prog-card.active .prog-arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Barre de progression globale */
-        .prog-progress-bar {
-            height: 1px;
-            background: rgba(255,255,255,0.06);
-            margin-top: 0;
+        .slide-card {
+            flex: 0 0 340px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 44px 36px;
             position: relative;
             overflow: hidden;
+            transition: border-color 0.5s, background 0.5s, transform 0.7s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.7s;
+            opacity: 0.35;
+            transform: scale(0.94);
         }
 
-        .prog-progress-fill {
-            height: 100%;
-            background: var(--accent);
+        .slide-card.active {
+            border-color: rgba(0,242,255,0.3);
+            background: rgba(0,242,255,0.04);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Ligne de progression en haut */
+        .slide-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            height: 2px;
             width: 0%;
-            transition: width 0.4s ease;
-            box-shadow: 0 0 8px rgba(0,242,255,0.4);
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(0,242,255,0.6);
+            transition: width 0s;
         }
 
-        /* Indicateurs bas */
-        .prog-indicators {
+        .slide-card.active::before {
+            width: 100%;
+            transition: width 4s linear;
+        }
+
+        /* Halo */
+        .slide-card::after {
+            content: '';
+            position: absolute;
+            top: -100px; left: -100px;
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(0,242,255,0.07) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s;
+            pointer-events: none;
+        }
+        .slide-card.active::after { opacity: 1; }
+
+        .slide-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--accent);
+            margin-bottom: 28px;
+            display: block;
+        }
+
+        .slide-title {
+            font-family: 'Syne', sans-serif !important;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+
+        .slide-body {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.55);
+            font-weight: 300;
+        }
+
+        /* Indicateurs */
+        .slide-indicators {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 10px;
-            margin-top: 40px;
+            margin-top: 44px;
         }
 
-        .prog-dot {
-            width: 28px;
-            height: 3px;
+        .slide-dot {
+            width: 24px;
+            height: 2px;
             border-radius: 999px;
-            background: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.15);
             cursor: pointer;
-            transition: all 0.4s;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
         }
 
-        .prog-dot.active {
+        .slide-dot.active {
+            width: 48px;
             background: var(--accent);
+            box-shadow: 0 0 8px rgba(0,242,255,0.5);
+        }
+
+        /* Boutons nav */
+        .slide-nav {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .slide-btn {
             width: 44px;
-            box-shadow: 0 0 8px rgba(0,242,255,0.4);
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .prog-dot.visited {
-            background: rgba(0,242,255,0.35);
+        .slide-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 12px rgba(0,242,255,0.2);
         }
 
-        @media (max-width: 960px) {
-            .prog-track {
-                grid-template-columns: 1fr;
-            }
-            .prog-card {
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.06);
-            }
-            .prog-card.active .prog-body,
-            .prog-card.visited .prog-body {
-                max-height: 300px;
-            }
+        @media (max-width: 768px) {
+            .slide-card { flex: 0 0 80vw; }
+            .slider-outer::before,
+            .slider-outer::after { width: 40px; }
+            .slider-track { padding: 20px 10vw 30px; }
         }
 
         /* NAVIGATION DOTS */
@@ -824,44 +819,40 @@
                 4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d'appel régulières sans cirque marketing.
             </p>
 
-            <div class="prog-progress-bar"><div class="prog-progress-fill" id="prog-fill"></div></div>
-
-            <div class="prog-track" id="prog-track" data-aos="fade-up">
-                <div class="prog-card active" data-index="0" onclick="progGoTo(0)">
-                    <div class="prog-glow"></div>
-                    <div class="prog-number">01 / 04</div>
-                    <div class="prog-title">Clarté</div>
-                    <div class="prog-body">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</div>
-                    <div class="prog-arrow">→</div>
-                </div>
-                <div class="prog-card" data-index="1" onclick="progGoTo(1)">
-                    <div class="prog-glow"></div>
-                    <div class="prog-number">02 / 04</div>
-                    <div class="prog-title">Message</div>
-                    <div class="prog-body">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</div>
-                    <div class="prog-arrow">→</div>
-                </div>
-                <div class="prog-card" data-index="2" onclick="progGoTo(2)">
-                    <div class="prog-glow"></div>
-                    <div class="prog-number">03 / 04</div>
-                    <div class="prog-title">Système</div>
-                    <div class="prog-body">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</div>
-                    <div class="prog-arrow">→</div>
-                </div>
-                <div class="prog-card" data-index="3" onclick="progGoTo(3)">
-                    <div class="prog-glow"></div>
-                    <div class="prog-number">04 / 04</div>
-                    <div class="prog-title">Action</div>
-                    <div class="prog-body">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</div>
-                    <div class="prog-arrow">→</div>
+            <div class="slider-outer" data-aos="fade-up">
+                <div class="slider-track" id="slide-track">
+                    <div class="slide-card active">
+                        <span class="slide-num">01 — 04</span>
+                        <div class="slide-title">Clarté</div>
+                        <p class="slide-body">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
+                    </div>
+                    <div class="slide-card">
+                        <span class="slide-num">02 — 04</span>
+                        <div class="slide-title">Message</div>
+                        <p class="slide-body">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
+                    </div>
+                    <div class="slide-card">
+                        <span class="slide-num">03 — 04</span>
+                        <div class="slide-title">Système</div>
+                        <p class="slide-body">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
+                    </div>
+                    <div class="slide-card">
+                        <span class="slide-num">04 — 04</span>
+                        <div class="slide-title">Action</div>
+                        <p class="slide-body">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="prog-indicators">
-                <div class="prog-dot active" onclick="progGoTo(0)"></div>
-                <div class="prog-dot" onclick="progGoTo(1)"></div>
-                <div class="prog-dot" onclick="progGoTo(2)"></div>
-                <div class="prog-dot" onclick="progGoTo(3)"></div>
+            <div class="slide-indicators" id="slide-dots">
+                <div class="slide-dot active" onclick="slideTo(0)"></div>
+                <div class="slide-dot" onclick="slideTo(1)"></div>
+                <div class="slide-dot" onclick="slideTo(2)"></div>
+                <div class="slide-dot" onclick="slideTo(3)"></div>
+            </div>
+            <div class="slide-nav">
+                <button class="slide-btn" onclick="slidePrev()">←</button>
+                <button class="slide-btn" onclick="slideNext()">→</button>
             </div>
 
             <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
@@ -1014,51 +1005,68 @@
             layout: "month_view"
         });
 
-        // 2. Programme — animation séquentielle
-        let progCurrent = 0;
-        let progTimer = null;
-        const PROG_DURATION = 4000;
+        // 2. Slider programme
+        let slideCurrent = 0;
+        let slideTimer = null;
+        const SLIDE_DURATION = 4000;
+        const CARD_WIDTH = 340;
+        const CARD_GAP = 24;
 
-        function progGoTo(index) {
-            const cards = document.querySelectorAll('.prog-card');
-            const dots  = document.querySelectorAll('.prog-dot');
-            const fill  = document.getElementById('prog-fill');
+        function slideTo(index) {
+            const track  = document.getElementById('slide-track');
+            const cards  = track.querySelectorAll('.slide-card');
+            const dots   = document.querySelectorAll('.slide-dot');
+            const outer  = track.parentElement;
+            const outerW = outer.offsetWidth;
 
-            cards.forEach((c, i) => {
+            // Reset toutes les cartes (force le reflow pour relancer l'animation ::before)
+            cards.forEach(c => {
                 c.classList.remove('active');
-                if (i < index) c.classList.add('visited');
-                else c.classList.remove('visited');
+                void c.offsetWidth; // reflow
             });
-            dots.forEach((d, i) => {
-                d.classList.remove('active', 'visited');
-                if (i === index) d.classList.add('active');
-                else if (i < index) d.classList.add('visited');
-            });
+            dots.forEach(d => d.classList.remove('active'));
 
             cards[index].classList.add('active');
-            fill.style.width = ((index + 1) / cards.length * 100) + '%';
-            progCurrent = index;
+            dots[index].classList.add('active');
 
-            clearInterval(progTimer);
-            progTimer = setInterval(() => {
-                const next = (progCurrent + 1) % cards.length;
-                progGoTo(next);
-            }, PROG_DURATION);
+            // Centrer la carte active
+            const cardOffset = index * (CARD_WIDTH + CARD_GAP);
+            const centerOffset = (outerW / 2) - (CARD_WIDTH / 2) - 80; // 80 = padding
+            const translateX = -cardOffset + centerOffset;
+            track.style.transform = `translateX(${translateX}px)`;
+
+            slideCurrent = index;
+
+            clearInterval(slideTimer);
+            slideTimer = setInterval(() => {
+                slideTo((slideCurrent + 1) % cards.length);
+            }, SLIDE_DURATION);
         }
 
+        function slideNext() { slideTo((slideCurrent + 1) % 4); }
+        function slidePrev() { slideTo((slideCurrent + 3) % 4); }
+
         // Pause on hover
-        const track = document.getElementById('prog-track');
-        if (track) {
-            track.addEventListener('mouseenter', () => clearInterval(progTimer));
-            track.addEventListener('mouseleave', () => {
-                progTimer = setInterval(() => {
-                    progGoTo((progCurrent + 1) % 4);
-                }, PROG_DURATION);
+        const slideOuter = document.querySelector('.slider-outer');
+        if (slideOuter) {
+            slideOuter.addEventListener('mouseenter', () => clearInterval(slideTimer));
+            slideOuter.addEventListener('mouseleave', () => {
+                slideTimer = setInterval(() => slideTo((slideCurrent + 1) % 4), SLIDE_DURATION);
+            });
+        }
+
+        // Swipe tactile
+        let touchStartX = 0;
+        if (slideOuter) {
+            slideOuter.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+            slideOuter.addEventListener('touchend', e => {
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                if (Math.abs(dx) > 40) dx < 0 ? slideNext() : slidePrev();
             });
         }
 
         // Start
-        progGoTo(0);
+        slideTo(0);
 
         // 3. Navigation par points
         function scrollToSection(index) {
