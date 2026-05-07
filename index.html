@@ -653,38 +653,60 @@
                 dot.classList.toggle('active', index === current);
             });
         });
-    </script>
-
-    <!-- Script Cal.com : Intégration invisible et fluide -->
 <script>
-  (function (C, A, L) { 
-    let p = function (a, ar) { a.q.push(ar); }; 
-    let d = C.document; C.Cal = C.Cal || function () { 
-      let cal = C.Cal; let ar = arguments; if (!cal.q) { cal.q = []; } p(cal, ar); 
-    }; 
-    let js = d.createElement("script"); js.async = true; 
-    js.src = "https://app.cal.com/embed/embed.js"; 
-    d.head.appendChild(js); 
-    
-    C.Cal("init", { origin: "https://cal.com" });
-    
-    // Personnalisation aux couleurs de ton identité Rebelle/Héros
-    C.Cal("ui", { 
-      theme: "dark", 
-      styles: { 
-        branding: { brandColor: "#00f2ff" } // Ton cyan d'accentuation
-      },
-      hideEventTypeDetails: false,
-      layout: "month_view"
-    });
-  })(window, "Cal");
+  // 1. Initialisation AOS
+  AOS.init({ duration: 1200, once: false });
 
-  // Liaison : lie tous les éléments avec la classe .btn-cta à ton calendrier
-  Cal("link", {
-    link: "miora-rasolofo",
-    target: ".btn-cta"
+  // 2. Gestion du Slider (L'Accélérateur)
+  const slider = document.getElementById('prog-slider');
+  if (slider) {
+      const items = slider.querySelectorAll('.slider-item');
+      const scrollNext = () => {
+          const step = items[0].offsetWidth + 30;
+          if (slider.scrollLeft >= (slider.scrollWidth - slider.offsetWidth - 10)) {
+              slider.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+              slider.scrollBy({ left: step, behavior: 'smooth' });
+          }
+      };
+      let autoCycle = setInterval(scrollNext, 3000);
+      slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
+      slider.addEventListener('mouseleave', () => {
+          clearInterval(autoCycle);
+          autoCycle = setInterval(scrollNext, 3000);
+      });
+  }
+
+  // 3. Navigation par points (Dots)
+  function scrollToSection(index) {
+      const sections = document.querySelectorAll('section');
+      if(sections[index]) sections[index].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      const dots = document.querySelectorAll('.dot');
+      let current = 0;
+      sections.forEach((section, index) => {
+          if (window.scrollY >= section.offsetTop - window.innerHeight / 3) {
+              current = index;
+          }
+      });
+      dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === current);
+      });
   });
-</script>
-    
+
+  // 4. Initialisation Cal.com (Unique et Propre)
+  // On utilise "Cal" car il a été défini dans le head
+  if (window.Cal) {
+      Cal("ui", { 
+        theme: "dark", 
+        styles: { branding: { brandColor: "#00f2ff" } },
+        hideEventTypeDetails: false,
+        layout: "month_view"
+      });
+  }
+</script>    
 </body>
 </html>
