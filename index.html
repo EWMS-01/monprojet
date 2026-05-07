@@ -304,40 +304,31 @@
             html { scroll-snap-type: none; }
             body { scroll-snap-type: none; }
         }
+        
    </style>
 
     <!-- Cal element-click embed code begins -->
     <script type="text/javascript">
       (function (C, A, L) { _pbq = L; if (!C._unp) { C.Cal = function () { var s = arguments; var e = Array.prototype.slice.call(s); if (!C.Cal.q) { C.Cal.q = [] } C.Cal.q.push(e) }; C.Cal.ns = {}; C.Cal.ns[L] = C.Cal(); C.Cal.ns[L].q = C.Cal.q; C.Cal._unp = true } })(window, "https://app.cal.com/embed/embed.js", "cal");
       
-      // 1. Initialisation
+      // 1. Initialisation unique
       cal("init", { origin: "https://app.cal.com" });
 
-      // 2. Configuration visuelle
+      // 2. Configuration visuelle (Cyan #00f2ff)
       cal("ui", {"styles":{"branding":{"brandColor":"#00f2ff"}},"hideEventTypeDetails":false,"layout":"month_view"});
 
-      // 3. Liaison forcée (doit être DANS les balises script)
+      // 3. Liaison automatique à TOUS tes boutons avec la classe .btn-cta
       cal("link", {
         selector: ".btn-cta",
         itemProps: {
           calLink: "miora-rasolofo/30min"
         }
       });
-        
-    <!-- Cal element-click embed code begins -->
-<script type="text/javascript">
-  (function (C, A, L) { _pbq = L; if (!C._unp) { C.Cal = function () { var s = arguments; var e = Array.prototype.slice.call(s); if (!C.Cal.q) { C.Cal.q = [] } C.Cal.q.push(e) }; C.Cal.ns = {}; C.Cal.ns[L] = C.Cal(); C.Cal.ns[L].q = C.Cal.q; C.Cal._unp = true } })(window, "https://app.cal.com/embed/embed.js", "cal");
-  
-  // Initialisation du popup
-  cal("init", { origin: "https://app.cal.com" });
-
-  // Configuration pour que tous les boutons avec la classe .btn-cta ouvrent le popup
-  cal("ui", {"styles":{"branding":{"brandColor":"#00f2ff"}},"hideEventTypeDetails":false,"layout":"month_view"});
-</script>
-<!-- Cal element-click embed code ends -->
-
+    </script>
+    <!-- Cal element-click embed code ends -->
     
 </head>
+    
 <body>
 
     <nav></nav>
