@@ -304,25 +304,8 @@
             html { scroll-snap-type: none; }
             body { scroll-snap-type: none; }
         }
-        
-   </style>
-
-  <!-- Cal element-click embed code begins -->
-<script type="text/javascript">
-  (function (C, A, L) { _pbq = L; if (!C._unp) { C.Cal = function () { var s = arguments; var e = Array.prototype.slice.call(s); if (!C.Cal.q) { C.Cal.q = [] } C.Cal.q.push(e) }; C.Cal.ns = {}; C.Cal.ns[L] = C.Cal(); C.Cal.ns[L].q = C.Cal.q; C.Cal._unp = true } })(window, "https://app.cal.com/embed/embed.js", "cal");
-
-  cal("init", { origin: "https://app.cal.com" });
-
-  cal("ui", {
-    "styles": {"branding": {"brandColor": "#00f2ff"}},
-    "hideEventTypeDetails": false,
-    "layout": "month_view"
-  });
-</script>
-<!-- Cal element-click embed code ends -->
-    
+    </style>
 </head>
-    
 <body>
 
     <nav></nav>
@@ -367,13 +350,8 @@
                         <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> rester toi‑même, sans jouer un personnage.</li>
                     </ul>
                 </div>
-                
-    <button 
-  data-cal-link="miora-rasolofo/30min" 
-  data-cal-config='{"layout":"month_view"}'
-  class="btn-cta">
-  Stabiliser mes revenus
-</button>
+
+                <a href="https://cal.com/miora-rasolofo" class="btn-cta">STABILISER MES REVENUS</a>
                 
                 <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
                     30 minutes en visio pour faire le point sur ta situation, sans pression.
@@ -549,7 +527,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">Réserver mon diagnostic</a>
+                <a href="https://cal.com/miora-rasolofo" class="btn-cta">Prendre le contrôle du moteur</a>
             </div>
 
             <div data-aos="fade-left" style="flex: 1; display: flex; justify-content: center; position: relative;">
@@ -653,60 +631,6 @@
                 dot.classList.toggle('active', index === current);
             });
         });
-<script>
-  // 1. Initialisation AOS
-  AOS.init({ duration: 1200, once: false });
-
-  // 2. Gestion du Slider (L'Accélérateur)
-  const slider = document.getElementById('prog-slider');
-  if (slider) {
-      const items = slider.querySelectorAll('.slider-item');
-      const scrollNext = () => {
-          const step = items[0].offsetWidth + 30;
-          if (slider.scrollLeft >= (slider.scrollWidth - slider.offsetWidth - 10)) {
-              slider.scrollTo({ left: 0, behavior: 'smooth' });
-          } else {
-              slider.scrollBy({ left: step, behavior: 'smooth' });
-          }
-      };
-      let autoCycle = setInterval(scrollNext, 3000);
-      slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
-      slider.addEventListener('mouseleave', () => {
-          clearInterval(autoCycle);
-          autoCycle = setInterval(scrollNext, 3000);
-      });
-  }
-
-  // 3. Navigation par points (Dots)
-  function scrollToSection(index) {
-      const sections = document.querySelectorAll('section');
-      if(sections[index]) sections[index].scrollIntoView({ behavior: 'smooth' });
-  }
-
-  window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('section');
-      const dots = document.querySelectorAll('.dot');
-      let current = 0;
-      sections.forEach((section, index) => {
-          if (window.scrollY >= section.offsetTop - window.innerHeight / 3) {
-              current = index;
-          }
-      });
-      dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === current);
-      });
-  });
-
-  // 4. Initialisation Cal.com (Unique et Propre)
-  // On utilise "Cal" car il a été défini dans le head
-  if (window.Cal) {
-      Cal("ui", { 
-        theme: "dark", 
-        styles: { branding: { brandColor: "#00f2ff" } },
-        hideEventTypeDetails: false,
-        layout: "month_view"
-      });
-  }
-</script>    
+    </script>
 </body>
 </html>
