@@ -306,6 +306,14 @@
         }
     </style>
 
+    // Cette ligne force la liaison entre tes boutons et l'événement de 30min
+  cal("link", {
+    selector: ".btn-cta",
+    itemProps: {
+      calLink: "miora-rasolofo/30min"
+    }
+  });
+
     <!-- Cal element-click embed code begins -->
 <script type="text/javascript">
   (function (C, A, L) { _pbq = L; if (!C._unp) { C.Cal = function () { var s = arguments; var e = Array.prototype.slice.call(s); if (!C.Cal.q) { C.Cal.q = [] } C.Cal.q.push(e) }; C.Cal.ns = {}; C.Cal.ns[L] = C.Cal(); C.Cal.ns[L].q = C.Cal.q; C.Cal._unp = true } })(window, "https://app.cal.com/embed/embed.js", "cal");
