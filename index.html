@@ -991,84 +991,53 @@
     </section>
 
     <!-- SLIDE 3 : PROGRAMME -->
-    <section class="prog-section" style="background-color: var(--bg-3); padding: 0; overflow: hidden; position: relative;">
+    <section style="background-color: var(--bg-3); padding: 100px 0;">
+        <div class="container">
+            <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
+            <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
+                4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d'appel régulières sans cirque marketing.
+            </p>
 
-        <!-- Slides empilés -->
-        <div class="prog-slides" id="prog-slides">
-
-            <div class="prog-slide active" data-index="0">
-                <div class="prog-slide-inner">
-                    <div class="prog-slide-meta">
-                        <span class="prog-slide-tag">L'Accélérateur · 4 sessions</span>
-                        <span class="prog-counter">01 <span style="opacity:0.3">/ 04</span></span>
+            <div class="slider-outer" data-aos="fade-up">
+                <div class="slider-track" id="slide-track">
+                    <div class="slide-card active">
+                        <span class="slide-num">01 — 04</span>
+                        <div class="slide-title">Clarté</div>
+                        <p class="slide-body">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
                     </div>
-                    <h2 class="prog-slide-title">Clarté</h2>
-                    <div class="prog-slide-line"></div>
-                    <p class="prog-slide-body">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
-                    <p class="prog-slide-note">Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.</p>
+                    <div class="slide-card">
+                        <span class="slide-num">02 — 04</span>
+                        <div class="slide-title">Message</div>
+                        <p class="slide-body">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
+                    </div>
+                    <div class="slide-card">
+                        <span class="slide-num">03 — 04</span>
+                        <div class="slide-title">Système</div>
+                        <p class="slide-body">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
+                    </div>
+                    <div class="slide-card">
+                        <span class="slide-num">04 — 04</span>
+                        <div class="slide-title">Action</div>
+                        <p class="slide-body">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="prog-slide" data-index="1">
-                <div class="prog-slide-inner">
-                    <div class="prog-slide-meta">
-                        <span class="prog-slide-tag">L'Accélérateur · 4 sessions</span>
-                        <span class="prog-counter">02 <span style="opacity:0.3">/ 04</span></span>
-                    </div>
-                    <h2 class="prog-slide-title">Message</h2>
-                    <div class="prog-slide-line"></div>
-                    <p class="prog-slide-body">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
-                    <p class="prog-slide-note">Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.</p>
-                </div>
+            <div class="slide-indicators" id="slide-dots">
+                <div class="slide-dot active" onclick="slideTo(0)"></div>
+                <div class="slide-dot" onclick="slideTo(1)"></div>
+                <div class="slide-dot" onclick="slideTo(2)"></div>
+                <div class="slide-dot" onclick="slideTo(3)"></div>
+            </div>
+            <div class="slide-nav">
+                <button class="slide-btn" onclick="slidePrev()">←</button>
+                <button class="slide-btn" onclick="slideNext()">→</button>
             </div>
 
-            <div class="prog-slide" data-index="2">
-                <div class="prog-slide-inner">
-                    <div class="prog-slide-meta">
-                        <span class="prog-slide-tag">L'Accélérateur · 4 sessions</span>
-                        <span class="prog-counter">03 <span style="opacity:0.3">/ 04</span></span>
-                    </div>
-                    <h2 class="prog-slide-title">Système</h2>
-                    <div class="prog-slide-line"></div>
-                    <p class="prog-slide-body">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
-                    <p class="prog-slide-note">Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.</p>
-                </div>
-            </div>
-
-            <div class="prog-slide" data-index="3">
-                <div class="prog-slide-inner">
-                    <div class="prog-slide-meta">
-                        <span class="prog-slide-tag">L'Accélérateur · 4 sessions</span>
-                        <span class="prog-counter">04 <span style="opacity:0.3">/ 04</span></span>
-                    </div>
-                    <h2 class="prog-slide-title">Action</h2>
-                    <div class="prog-slide-line"></div>
-                    <p class="prog-slide-body">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
-                    <p class="prog-slide-note">Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.</p>
-                </div>
-            </div>
-
+            <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
+                Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.
+            </p>
         </div>
-
-        <!-- Barre de progression verticale -->
-        <div class="prog-vbar">
-            <div class="prog-vbar-fill" id="prog-vbar-fill"></div>
-        </div>
-
-        <!-- Indicateurs + nav -->
-        <div class="prog-ui">
-            <div class="prog-dots-v" id="prog-dots-v">
-                <div class="prog-dot-v active" onclick="progSlideTo(0)"></div>
-                <div class="prog-dot-v" onclick="progSlideTo(1)"></div>
-                <div class="prog-dot-v" onclick="progSlideTo(2)"></div>
-                <div class="prog-dot-v" onclick="progSlideTo(3)"></div>
-            </div>
-            <div class="prog-arrows">
-                <button class="slide-btn" onclick="progSlidePrev()">↑</button>
-                <button class="slide-btn" onclick="progSlideNext()">↓</button>
-            </div>
-        </div>
-
     </section>
 
     <!-- SLIDE 4 : L'OFFRE -->
@@ -1215,56 +1184,63 @@
             layout: "month_view"
         });
 
-        // 2. Programme fullscreen slides
-        let progSlideIdx = 0;
-        let progSlideTimer = null;
-        const PROG_DURATION = 5000;
-        const TOTAL_SLIDES = 4;
+        // 2. Slider programme
+        let slideCurrent = 0;
+        let slideTimer = null;
+        const SLIDE_DURATION = 4000;
+        const CARD_WIDTH = 340;
+        const CARD_GAP = 24;
 
-        function progSlideTo(index) {
-            const slides  = document.querySelectorAll('.prog-slide');
-            const dots    = document.querySelectorAll('.prog-dot-v');
-            const vfill   = document.getElementById('prog-vbar-fill');
+        function slideTo(index) {
+            const track  = document.getElementById('slide-track');
+            const cards  = track.querySelectorAll('.slide-card');
+            const dots   = document.querySelectorAll('.slide-dot');
+            const outer  = track.parentElement;
+            const outerW = outer.offsetWidth;
 
-            // Exit current
-            slides[progSlideIdx].classList.add('exit-up');
-            slides[progSlideIdx].classList.remove('active');
-            setTimeout(() => slides[progSlideIdx].classList.remove('exit-up'), 600);
+            cards.forEach(c => {
+                c.classList.remove('active');
+                void c.offsetWidth;
+            });
+            dots.forEach(d => d.classList.remove('active'));
 
-            progSlideIdx = index;
+            cards[index].classList.add('active');
+            dots[index].classList.add('active');
 
-            // Activate new
-            slides[progSlideIdx].classList.add('active');
+            const cardOffset = index * (CARD_WIDTH + CARD_GAP);
+            const centerOffset = (outerW / 2) - (CARD_WIDTH / 2) - 80;
+            const translateX = -cardOffset + centerOffset;
+            track.style.transform = `translateX(${translateX}px)`;
 
-            // Dots
-            dots.forEach((d, i) => d.classList.toggle('active', i === progSlideIdx));
+            slideCurrent = index;
 
-            // Vertical bar
-            vfill.style.height = ((progSlideIdx + 1) / TOTAL_SLIDES * 100) + '%';
-
-            // Restart timer
-            clearInterval(progSlideTimer);
-            progSlideTimer = setInterval(() => {
-                progSlideTo((progSlideIdx + 1) % TOTAL_SLIDES);
-            }, PROG_DURATION);
+            clearInterval(slideTimer);
+            slideTimer = setInterval(() => {
+                slideTo((slideCurrent + 1) % cards.length);
+            }, SLIDE_DURATION);
         }
 
-        function progSlideNext() { progSlideTo((progSlideIdx + 1) % TOTAL_SLIDES); }
-        function progSlidePrev() { progSlideTo((progSlideIdx + TOTAL_SLIDES - 1) % TOTAL_SLIDES); }
+        function slideNext() { slideTo((slideCurrent + 1) % 4); }
+        function slidePrev() { slideTo((slideCurrent + 3) % 4); }
 
-        // Swipe tactile
-        let progTouchY = 0;
-        const progSection = document.querySelector('.prog-section');
-        if (progSection) {
-            progSection.addEventListener('touchstart', e => { progTouchY = e.touches[0].clientY; }, { passive: true });
-            progSection.addEventListener('touchend', e => {
-                const dy = e.changedTouches[0].clientY - progTouchY;
-                if (Math.abs(dy) > 40) dy < 0 ? progSlideNext() : progSlidePrev();
+        const slideOuter = document.querySelector('.slider-outer');
+        if (slideOuter) {
+            slideOuter.addEventListener('mouseenter', () => clearInterval(slideTimer));
+            slideOuter.addEventListener('mouseleave', () => {
+                slideTimer = setInterval(() => slideTo((slideCurrent + 1) % 4), SLIDE_DURATION);
             });
         }
 
-        // Start
-        progSlideTo(0);
+        let touchStartX = 0;
+        if (slideOuter) {
+            slideOuter.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+            slideOuter.addEventListener('touchend', e => {
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                if (Math.abs(dx) > 40) dx < 0 ? slideNext() : slidePrev();
+            });
+        }
+
+        slideTo(0);
 
         // 3. Navigation par points
         function scrollToSection(index) {
