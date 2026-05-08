@@ -984,6 +984,107 @@
 
         #cal-embed { width: 100%; flex: 1; min-height: 0; }
         #cal-embed iframe { width: 100% !important; height: 100% !important; min-height: 680px; }
+
+        /* ── PROTOCOLE ── */
+        .protocole-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Ligne horizontale qui relie les étapes */
+        .protocole-grid::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: calc(16.66% + 20px);
+            right: calc(16.66% + 20px);
+            height: 1px;
+            background: linear-gradient(to right, rgba(0,242,255,0.15), rgba(0,242,255,0.4), rgba(0,242,255,0.15));
+        }
+
+        .protocole-step {
+            padding: 0 40px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .protocole-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--accent);
+            opacity: 0.4;
+            margin-bottom: 28px;
+            display: block;
+            transition: opacity 0.3s;
+        }
+
+        .protocole-step:hover .protocole-num { opacity: 1; }
+
+        /* Point sur la ligne */
+        .protocole-connector {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,242,255,0.3);
+            background: var(--bg-1);
+            margin: 0 auto 20px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .protocole-step:hover .protocole-connector,
+        .protocole-step--accent .protocole-connector {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0,242,255,0.4);
+            background: var(--accent);
+        }
+
+        .protocole-title {
+            font-family: 'Syne', sans-serif !important;
+            font-size: 1.3rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent) !important;
+            margin-bottom: 16px;
+            line-height: 1.1 !important;
+        }
+
+        .protocole-body {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.5);
+            font-weight: 300;
+        }
+
+        .protocole-step--accent {
+            position: relative;
+        }
+
+        .protocole-step--accent::before {
+            content: '';
+            position: absolute;
+            inset: -20px 10px;
+            background: rgba(0,242,255,0.03);
+            border: 1px solid rgba(0,242,255,0.12);
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .protocole-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .protocole-grid::before { display: none; }
+            .protocole-step { padding: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start; }
+            .protocole-connector { margin: 0 0 16px 0; }
+            .protocole-step--accent::before { inset: -16px -16px; }
+        }
     </style>
 </head>
 <body>
@@ -1272,33 +1373,41 @@
     <!-- SLIDE 6 : PROCESSUS -->
     <section style="background-color: var(--bg-1); padding: 120px 0;">
         <div class="container">
-            <h2 style="font-family: 'Syne'; font-size: clamp(2rem, 5vw, 3.5rem); text-align: center; text-transform: uppercase; margin-bottom: 80px;" data-aos="fade-down">
-                Le protocole <span class="strike-accent">Simple.</span>
-            </h2>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; position: relative;">
-                <div class="card" data-aos="fade-up" data-aos-delay="100" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
-                    <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">01. INPUT</div>
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu m'écris</h3>
-                    <p style="opacity: 0.8; line-height: 1.6;">Tu m'envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.</p>
+            <p data-aos="fade-up" style="text-align:center; font-size:0.7rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--accent); opacity:0.7; margin-bottom:20px;">3 étapes. Pas plus.</p>
+            <h2 class="section-title" data-aos="fade-down">Le protocole Simple.</h2>
+            <p data-aos="fade-up" style="text-align:center; font-size:1.05rem; opacity:0.5; max-width:480px; margin:0 auto 80px; font-weight:300; line-height:1.7;">
+                Tu m'écris. On se parle. Tu décides.
+            </p>
+
+            <div class="protocole-grid" data-aos="fade-up">
+
+                <div class="protocole-step">
+                    <div class="protocole-connector"></div>
+                    <div class="protocole-num">01</div>
+                    <h3 class="protocole-title">Tu m'écris</h3>
+                    <p class="protocole-body">Quelques lignes sur ton activité, tes revenus actuels et ce que tu veux changer. Pas de formulaire à rallonge.</p>
                 </div>
 
-                <div class="card" data-aos="fade-up" data-aos-delay="250" style="border-top: 4px solid var(--accent); padding: 40px; background: rgba(0,242,255,0.03);">
-                    <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">02. ANALYSE</div>
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">On se parle</h3>
-                    <p style="opacity: 0.9; line-height: 1.6;">30 minutes en visio pour faire le point, sans pression. Je te dis clairement si <strong>l'Accélérateur Simple</strong> est adapté pour toi.</p>
+                <div class="protocole-step protocole-step--accent">
+                    <div class="protocole-connector"></div>
+                    <div class="protocole-num">02</div>
+                    <h3 class="protocole-title">On se parle</h3>
+                    <p class="protocole-body">30 minutes en visio. Je te dis clairement si l'Accélérateur Simple est fait pour toi — ou pas.</p>
                 </div>
 
-                <div class="card" data-aos="fade-up" data-aos-delay="400" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
-                    <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">03. OUTPUT</div>
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu décides</h3>
-                    <p style="opacity: 0.8; line-height: 1.6;">Si c'est oui, on cale les 4 sessions. Si c'est non, tu repars avec plus de clarté que quand tu es arrivée.</p>
+                <div class="protocole-step">
+                    <div class="protocole-connector"></div>
+                    <div class="protocole-num">03</div>
+                    <h3 class="protocole-title">Tu décides</h3>
+                    <p class="protocole-body">Si c'est oui, on cale les 4 sessions. Si c'est non, tu repars avec plus de clarté que quand tu es arrivée.</p>
                 </div>
+
             </div>
 
             <div style="text-align: center; margin-top: 80px;" data-aos="zoom-in">
-                <button onclick="openRdv()" class="btn-cta" style="padding: 20px 50px; font-size: 1.2rem;">Je veux mon plan simple</button>
-                <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.5; letter-spacing: 1px; text-transform: uppercase;">Aucun engagement. Juste de la clarté.</p>
+                <button onclick="openRdv()" class="btn-cta" style="padding: 18px 48px; font-size: 1rem;">Réserver 30 min gratuit</button>
+                <p style="margin-top: 16px; font-size: 0.75rem; opacity: 0.35; letter-spacing: 2px; text-transform: uppercase;">Aucun engagement · Juste de la clarté.</p>
             </div>
         </div>
     </section>
