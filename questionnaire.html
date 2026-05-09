@@ -751,7 +751,7 @@
     </form>
   </div>
 
-  <script>
+<script>
     // ── Barre de progression dynamique ──
     const progressBar = document.getElementById('progress-bar');
     const form = document.getElementById('filtre-form');
@@ -781,9 +781,10 @@
     form.addEventListener('change', updateProgress);
     updateProgress();
 
-    // ── Soumission ──
+    // ── Soumission (C'est ici que j'ai fait la correction) ──
     const btn = document.getElementById('submit-btn');
     const successScreen = document.getElementById('success-screen');
+    const pageContent = document.querySelector('.page'); // On cible le contenu de la page
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -798,6 +799,9 @@
         });
 
         if (res.ok) {
+          // CORRECTIF : On cache tout le contenu du formulaire
+          pageContent.style.display = 'none'; 
+          // On affiche l'écran de succès
           successScreen.classList.add('show');
           window.scrollTo({ top: 0 });
         } else {
@@ -809,7 +813,7 @@
         btn.disabled = false;
       }
     });
-  </script>
-
+</script>
+  
 </body>
 </html>
