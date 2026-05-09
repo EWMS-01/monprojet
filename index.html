@@ -1482,17 +1482,7 @@
             });
         });
 
-        // 4. Pop-up RDV
-        function openRdv() {
-            const overlay = document.getElementById('rdv-overlay');
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeRdv() {
-            document.getElementById('rdv-overlay').style.display = 'none';
-            document.body.style.overflow = '';
-        }
+        
 
         // Fermer en cliquant sur le fond
         document.getElementById('rdv-overlay').addEventListener('click', function(e) {
